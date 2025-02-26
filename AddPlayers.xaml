@@ -1,0 +1,25 @@
+﻿<Page x:Class="CountMyDart_.AddPlayers"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CountMyDart_"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddPlayers" Background="AliceBlue">
+
+    <Grid>
+        <ListView x:Name="PlayerList" HorizontalAlignment="Left" Height="217" Margin="358,91,0,0" VerticalAlignment="Top" Width="377" d:ItemsSource="{d:SampleData ItemCount=5}"  >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Nickname" Width="Auto"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="AcceptButton" Content="Accept Player" HorizontalAlignment="Left" Height="58" Margin="164,355,0,0" VerticalAlignment="Top" Width="304" Click="AcceptButton_Click"/>
+        <Label x:Name="PlayerLabel" Content="Give Player's Nickname" HorizontalAlignment="Left" Height="46" Margin="35,34,0,0" VerticalAlignment="Top" Width="255"/>
+        <TextBox x:Name="PlayerNickname" HorizontalAlignment="Left" Height="47" Margin="37,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253"/>
+        <Button x:Name="StartGameButton" Content="Start Game!" HorizontalAlignment="Left" Height="58" Margin="546,355,0,0" VerticalAlignment="Top" Width="170" Click="StartGameButton_Click"/>
+
+    </Grid>
+</Page>

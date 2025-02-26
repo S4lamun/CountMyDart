@@ -1,0 +1,36 @@
+﻿<Window x:Class="CountMyDart_.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CountMyDart_"
+        mc:Ignorable="d"
+        Title="CountMyDart" Height="450" Width="800" Background="Black">
+    
+    <Grid>
+        <Label x:Name="WelcomeLabel" Content="Count My Dart!" 
+               HorizontalAlignment="Center" VerticalAlignment="Top" 
+               FontSize="30" Foreground="Red" FontWeight="Bold"/>
+
+        <Label Content="Choose how many people will play:" 
+               HorizontalAlignment="Left" Margin="28,108,0,0" 
+               Foreground="White" FontSize="16"/>
+        <ComboBox x:Name="PlayersCombo" HorizontalAlignment="Left" Height="40" Margin="28,150,0,0" 
+                  VerticalAlignment="Top" Width="200" Background="Black" Foreground="Green" BorderBrush="Red" SelectionChanged="PlayersCombo_SelectionChanged"/>
+
+        <Label Content="Type of Game:" HorizontalAlignment="Left" Margin="372,108,0,0" 
+               Foreground="White" FontSize="16"/>
+        <ComboBox x:Name="GameCombo" HorizontalAlignment="Left" Height="40" Margin="372,150,0,0" 
+                  VerticalAlignment="Top" Width="200" Background="Black" Foreground="Green" BorderBrush="Red" SelectionChanged="GameCombo_SelectionChanged"/>
+
+        <Button x:Name="AcceptButton" Content="Accept" HorizontalAlignment="Center" 
+                VerticalAlignment="Bottom" Margin="0,0,0,30" Width="220" Height="60" 
+                Background="Red" Foreground="White" FontSize="18" FontWeight="Bold" BorderThickness="0"
+                Click="AcceptButton_Click"/>
+
+        <Image Source="/Images/DartIcon.png" HorizontalAlignment="Right" VerticalAlignment="Top" 
+               Width="100" Height="100" Margin="0,20,20,0"/>
+        
+
+    </Grid>
+</Window>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CountMyDart_"
         mc:Ignorable="d"
         Title="CountMyDart" Height="450" Width="800" Background="Black">
-    
+
     <Grid>
         <Label x:Name="WelcomeLabel" Content="Count My Dart!" 
                HorizontalAlignment="Center" VerticalAlignment="Top" 
@@ -30,7 +30,7 @@
 
         <Image Source="/Images/DartIcon.png" HorizontalAlignment="Right" VerticalAlignment="Top" 
                Width="100" Height="100" Margin="0,20,20,0"/>
-        
 
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="0, 0, 0, 0"/>
     </Grid>
 </Window>

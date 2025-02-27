@@ -25,9 +25,10 @@ namespace CountMyDart_
         int NumberOfPlayers;
         List<Button> acceptButtons;
         int RoundId;
+        MainWindow mainWindow;
         #endregion
 
-        public GamePage(TypeOfGame typeOfGame, List<Player> players)
+        public GamePage(TypeOfGame typeOfGame, List<Player> players, MainWindow mainWindow)
         {
             InitializeComponent();
             TypeOfGame = typeOfGame;
@@ -35,6 +36,7 @@ namespace CountMyDart_
             NumberOfPlayers = players.Count();
             acceptButtons = new();
             RoundId = 1;
+            this.mainWindow = mainWindow;
 
             #region View Making
             ScrollViewer scrollViewer = new ScrollViewer();
@@ -100,7 +102,7 @@ namespace CountMyDart_
                 Border separator = new Border { Height = 10 }; // to make distance between 2 players
 
                 Button acceptButton = new Button { Visibility = Visibility.Hidden };
-                acceptButton.Click += (sender, e) => AcceptButton_Click(sender, e, p, throw1Block.Text, throw2Block.Text, throw3Block.Text, targetBlock); //lamba expression to give Player as param
+                acceptButton.Click += (sender, e) => AcceptButton_Click(sender, e, p, throw1Block, throw2Block, throw3Block, targetBlock); //lamba expression to give Player as param
                 acceptButtons.Add(acceptButton); // adding to list of button
 
                 playerPanel.Children.Add(namePanel);
@@ -127,21 +129,21 @@ namespace CountMyDart_
 
 
         #region Buttons
-        private void AcceptButton_Click(object sender, RoutedEventArgs e, Player player, string throw1, string throw2, string throw3, TextBlock targetBlock)
+        private void AcceptButton_Click(object sender, RoutedEventArgs e, Player player, TextBox throw1, TextBox throw2, TextBox throw3, TextBlock targetBlock)
         {
-            if(!int.TryParse(throw1, out int a) || a < 0 || a > 60)
+            if(!int.TryParse(throw1.Text, out int a) || a < 0 || a > 60)
             {
                 MessageBox.Show($"Invalid input! (Player {player.Name})", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if (!int.TryParse(throw2, out int b) || b<0||b>60)
+            if (!int.TryParse(throw2.Text, out int b) || b<0||b>60)
             {
                 MessageBox.Show($"Invalid input! (Player {player.Name})", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if (!int.TryParse(throw3, out int c) || c < 0 || c > 60)
+            if (!int.TryParse(throw3.Text, out int c) || c < 0 || c > 60)
             {
                 MessageBox.Show($"Invalid input! (Player {player.Name})", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -155,6 +157,9 @@ namespace CountMyDart_
 
             player.TargetPoints = player.TargetPoints - a - b - c;
             targetBlock.Text = $"{player.TargetPoints}";
+            throw1.Text = "0";
+            throw2.Text = "0";
+            throw3.Text = "0";
 
             if (player.TargetPoints == 0)
             {

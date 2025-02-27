@@ -25,6 +25,8 @@ public partial class MainWindow : Window
 {
     int NumberOfPlayers;
     TypeOfGame GameType;
+    
+
     public MainWindow()
     {
         InitializeComponent();
@@ -41,8 +43,9 @@ public partial class MainWindow : Window
 
     private void AcceptButton_Click(object sender, RoutedEventArgs e)
     {
-        AddPlayers addPlayersPage = new AddPlayers(NumberOfPlayers, GameType);
-        Application.Current.MainWindow.Content = addPlayersPage;
+        //AddPlayers addPlayersPage = new AddPlayers(NumberOfPlayers, GameType);
+       // Application.Current.MainWindow.Content = addPlayersPage;
+       MainFrame.Navigate(new AddPlayers(NumberOfPlayers, GameType, this));
     }
 
 

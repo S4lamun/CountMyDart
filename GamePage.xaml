@@ -1,0 +1,53 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CountMyDartMaui.GamePage"
+             Title="">
+
+    <ScrollView HorizontalScrollBarVisibility="Default">
+        <VerticalStackLayout Padding="10" Spacing="15">
+
+            <Label Text="{Binding RoundText, Mode=TwoWay}" FontSize="24" HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold"/>
+            
+
+                <CollectionView ItemsSource="{Binding Players}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:Name="PlayerTemplate">
+                        <Border Padding="15" Margin="5" BackgroundColor="IndianRed">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10" />
+                            </Border.StrokeShape>
+                            <Grid ColumnDefinitions="Auto, *, Auto, Auto">
+                                <Label Text="{Binding Name}" FontSize="20" FontAttributes="Bold" VerticalTextAlignment="Center"
+                                       Grid.Column="0"
+                                       WidthRequest="100"  LineBreakMode="WordWrap" />
+                                <VerticalStackLayout Grid.Column="1">
+                                    <Label Text="To Gain:" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                                    <Label Text="{Binding TargetPoints}" FontSize="18" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Grid.Column="2" Spacing="5">
+                                    <Label Text="Throws:" FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Center"/>
+                                    <Grid ColumnSpacing="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Entry Grid.Column="0" MinimumWidthRequest="40" HorizontalOptions="Fill" Keyboard="Numeric" Placeholder="0" Text="{Binding Throw1, Mode=TwoWay}" Focused="ThrowFocused" TextChanged="ThrowTextChanged" HorizontalTextAlignment="Center"/>
+                                        <Entry Grid.Column="1" MinimumWidthRequest="40" HorizontalOptions="Fill" Keyboard="Numeric" Placeholder="0" Text="{Binding Throw2, Mode=TwoWay}" Focused="ThrowFocused" TextChanged="ThrowTextChanged" HorizontalTextAlignment="Center"/>
+                                        <Entry Grid.Column="2" MinimumWidthRequest="40" HorizontalOptions="Fill" Keyboard="Numeric" Placeholder="0" Text="{Binding Throw3, Mode=TwoWay}" Focused="ThrowFocused" TextChanged="ThrowTextChanged" HorizontalTextAlignment="Center"/>
+                                    </Grid>
+                                </VerticalStackLayout>
+                                <Image Grid.Column="3" Source="darts.png" WidthRequest="70"></Image>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="Accept All Throws" Clicked="AcceptAllThrowsButtonClicked" x:Name="AcceptButton" WidthRequest="200" HorizontalOptions="Start"/>
+            <Button Text="End Game" Clicked="EndGameButtonClicked" x:Name="EndGameButton" WidthRequest="200" HorizontalOptions="Center"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

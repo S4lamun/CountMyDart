@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="CountMyDartMaui.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:CountMyDartMaui"
+    Shell.FlyoutBehavior="Flyout"
+    Title="CountMyDartMaui">
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+    <ShellContent Title="Players" Route="players" ContentTemplate="{DataTemplate local:PlayerPage}" />
+
+    <ShellContent Title="GamePage" Route="game" ContentTemplate="{DataTemplate local:GamePage}"/>
+    <ShellContent Title="Scoreboard" Route="ScoreboardPage" ContentTemplate="{DataTemplate local:ScoreboardPage}"></ShellContent>
+
+</Shell>

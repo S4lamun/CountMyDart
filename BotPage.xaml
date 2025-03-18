@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CountMyDartMaui.BotPage"
+             Title=""
+             BackgroundColor="#1E1E1E">
+
+    <VerticalStackLayout Spacing="20" Padding="20">
+
+        <!-- Sekcja rundy -->
+        <Label Text="{Binding RoundText}" 
+               FontSize="24" 
+               HorizontalOptions="Center" 
+               TextColor="#FFD700" 
+               FontAttributes="Bold"
+               Margin="0,0,0,20"/>
+
+        <!-- Sekcja gracza -->
+        <Border BackgroundColor="#8B0000" 
+                Padding="15" 
+                StrokeShape="RoundRectangle 10">
+            <VerticalStackLayout Spacing="15">
+                <Label Text="Your points to gain:" 
+                       FontSize="18" 
+                       FontAttributes="Bold" 
+                       TextColor="#FFFFFF"/>
+                <Border BackgroundColor="#333333" 
+                Padding="10" 
+                StrokeShape="RoundRectangle 10">
+                    <Label Text="{Binding Player.TargetPoints}" 
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="#FFFFFF"
+                       HorizontalOptions="Center"/>
+                </Border>
+                <Label Text="Your throws:" 
+                       FontSize="18" 
+                       FontAttributes="Bold" 
+                       TextColor="#FFFFFF"/>
+                <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                    <Entry Text="{Binding Player.Throw1, Mode=TwoWay}" 
+                           Keyboard="Numeric" 
+                           Placeholder="0" 
+                           Focused="ThrowFocused" 
+                           WidthRequest="80"
+                           TextColor="#FFFFFF"
+                           BackgroundColor="#333333"
+                           HorizontalTextAlignment="Center"/>
+                    <Entry Text="{Binding Player.Throw2, Mode=TwoWay}" 
+                           Keyboard="Numeric" 
+                           Placeholder="0" 
+                           Focused="ThrowFocused" 
+                           WidthRequest="80"
+                           TextColor="#FFFFFF"
+                           BackgroundColor="#333333"
+                           HorizontalTextAlignment="Center"/>
+                    <Entry Text="{Binding Player.Throw3, Mode=TwoWay}" 
+                           Keyboard="Numeric" 
+                           Placeholder="0" 
+                           Focused="ThrowFocused" 
+                           WidthRequest="80"
+                           TextColor="#FFFFFF"
+                           BackgroundColor="#333333"
+                           HorizontalTextAlignment="Center"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- Większy odstęp między graczem a botem -->
+        <BoxView HeightRequest="20" Color="#1E1E1E"/>
+
+        <!-- Sekcja bota -->
+        <Border BackgroundColor="#8B0000" 
+                Padding="15" 
+                StrokeShape="RoundRectangle 10">
+            <VerticalStackLayout Spacing="15">
+                <Label Text="Bot points to gain:" 
+                       FontSize="18" 
+                       FontAttributes="Bold" 
+                       TextColor="#FFFFFF"
+                       HorizontalOptions="Center"/>
+                <Border BackgroundColor="#333333" 
+                        Padding="10" 
+                        StrokeShape="RoundRectangle 10">
+                    <Label Text="{Binding Bot.TargetPoints}" 
+                           FontSize="24" 
+                           FontAttributes="Bold" 
+                           TextColor="#FFFFFF"
+                           HorizontalOptions="Center"/>
+                </Border>
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- Przycisk "Accept Throws" na dole -->
+        <Button Text="Accept Throws" 
+                Clicked="AcceptThrowsButtonClicked" 
+                HorizontalOptions="FillAndExpand" 
+                BackgroundColor="#4CAF50" 
+                TextColor="#FFFFFF" 
+                CornerRadius="10" 
+                HeightRequest="50"
+                Margin="0,20,0,0"/>
+
+    </VerticalStackLayout>
+</ContentPage>

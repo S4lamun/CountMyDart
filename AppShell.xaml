@@ -15,5 +15,6 @@
 
     <ShellContent Title="GamePage" Route="game" ContentTemplate="{DataTemplate local:GamePage}"/>
     <ShellContent Title="Scoreboard" Route="ScoreboardPage" ContentTemplate="{DataTemplate local:ScoreboardPage}"></ShellContent>
+    <ShellContent Title="BotPage" Route="BotPage" ContentTemplate="{DataTemplate local:BotPage}"/>
 
 </Shell>

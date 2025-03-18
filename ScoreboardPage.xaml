@@ -1,7 +1,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CountMyDartMaui.ScoreboardPage"
-             Title="">
+             Title=""
+             BackgroundColor="#1E1E1E">
 
     <ScrollView HorizontalScrollBarVisibility="Default">
         <VerticalStackLayout Padding="10" Spacing="10">
@@ -10,9 +11,11 @@
                    FontSize="30" 
                    HorizontalOptions="Center" 
                    FontAttributes="Bold" 
-                   FontFamily="Arial"/>
+                   TextColor="#FFD700"/>
 
-            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto, *" Padding="20">
+            <Grid RowDefinitions="Auto,Auto,Auto" 
+                  ColumnDefinitions="Auto, *" 
+                  Padding="20">
                 <Image Source="firstplace.png" 
                        WidthRequest="50"
                        Grid.Row="0"
@@ -24,34 +27,48 @@
                        FontAttributes="Bold" 
                        Grid.Row="0"
                        Grid.Column="1"
-                       VerticalOptions="Center"/>
+                       VerticalOptions="Center"
+                       TextColor="#FFFFFF"/>
 
                 <Label x:Name="WinnerText" 
                        FontSize="24" 
                        FontAttributes="Bold"
                        Grid.Row="1"
                        Grid.Column="1"
-                       HorizontalTextAlignment="Center"/>
+                       HorizontalTextAlignment="Center"
+                       TextColor="#FFFFFF"/>
 
                 <Label x:Name="WinnerRounds" 
                        FontSize="24"
                        Grid.Row="2"
                        FontAttributes="Bold"
                        Grid.Column="1"
-                       HorizontalTextAlignment="Center"/>
+                       HorizontalTextAlignment="Center"
+                       TextColor="#FFFFFF"/>
             </Grid>
 
             <CollectionView ItemsSource="{Binding Players}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Border Padding="10" Margin="5" Stroke="Black" BackgroundColor="IndianRed">
+                        <Border Padding="10" 
+                                Margin="5" 
+                                BackgroundColor="#8B0000">
                             <Border.StrokeShape>
                                 <RoundRectangle CornerRadius="10" />
                             </Border.StrokeShape>
                             <HorizontalStackLayout Spacing="5">
-                                <Label Text="{Binding Place}" FontSize="18" FontAttributes ="Bold"/>
-                                <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold"/>
-                                <Label Text="{Binding EndCommunicate}" FontSize="18" FontAttributes="Bold"/>
+                                <Label Text="{Binding Place}" 
+                                       FontSize="17" 
+                                       FontAttributes="Bold"
+                                       TextColor="#FFFFFF"/>
+                                <Label Text="{Binding Name}" 
+                                       FontSize="17" 
+                                       FontAttributes="Bold"
+                                       TextColor="#FFFFFF"/>
+                                <Label Text="{Binding EndCommunicate}" 
+                                       FontSize="17" 
+                                       FontAttributes="Bold"
+                                       TextColor="#FFFFFF"/>
                             </HorizontalStackLayout>
                         </Border>
                     </DataTemplate>
@@ -61,9 +78,11 @@
             <Button Text="Start new game!" 
                     Clicked="StartNewGameButtonClicked" 
                     WidthRequest="250"
-                    HorizontalOptions="Center"/>
+                    HorizontalOptions="Center"
+                    BackgroundColor="#4CAF50"
+                    TextColor="#FFFFFF"
+                    CornerRadius="10"/>
 
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>

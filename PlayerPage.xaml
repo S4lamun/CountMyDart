@@ -1,16 +1,23 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CountMyDartMaui.PlayerPage"
-             Title="">
+             Title=""
+             BackgroundColor="#1E1E1E">
 
     <Grid RowDefinitions="Auto, *, Auto" Padding="20">
 
         <VerticalStackLayout Grid.Row="0" Spacing="10">
-            <Label Text="Enter Player Name" HorizontalOptions="Center" FontSize="24" FontAttributes="Bold" />
+            <Label Text="Enter Player Name" 
+                   HorizontalOptions="Center" 
+                   FontSize="24" 
+                   FontAttributes="Bold" 
+                   TextColor="#FFD700"/>
             <Entry Placeholder="Enter Player Name" 
                    x:Name="EnterPlayerName"
                    HorizontalOptions="Fill" 
                    Margin="0,0,0,10"
+                   TextColor="#FFFFFF"
+                   BackgroundColor="#333333"
                    Completed="EnterPlayerName_Completed"/>
         </VerticalStackLayout>
 
@@ -22,17 +29,20 @@
                     <SwipeView>
                         <SwipeView.LeftItems>
                             <SwipeItems Mode="Execute">
-                                <SwipeItem
-                                           BackgroundColor="DarkGreen"
-                                           IsEnabled="True"
+                                <SwipeItem BackgroundColor="#8B0000"
                                            Invoked="OnDeletePlayer"
-                                           Text="DELETE">
-                                </SwipeItem>
+                                           Text="DELETE"/>
                             </SwipeItems>
                         </SwipeView.LeftItems>
                         <StackLayout Padding="10">
-                            <Frame Padding="10" Margin="5" BorderColor="Black" BackgroundColor="IndianRed" CornerRadius="10">
-                                <Label Text="{Binding Name}" FontSize="18" TextColor="White"/>
+                            <Frame Padding="10" 
+                                   Margin="5" 
+                                   BorderColor="#4CAF50" 
+                                   BackgroundColor="#8B0000" 
+                                   CornerRadius="10">
+                                <Label Text="{Binding Name}" 
+                                       FontSize="18" 
+                                       TextColor="#FFFFFF"/>
                             </Frame>
                         </StackLayout>
                     </SwipeView>
@@ -46,21 +56,30 @@
                     HorizontalOptions="FillAndExpand"
                     Grid.Column="0"
                     HeightRequest="45"
-                    Margin="5,0"/>
+                    Margin="5,0"
+                    BackgroundColor="#4CAF50"
+                    TextColor="#FFFFFF"
+                    CornerRadius="10"/>
 
             <Button Text="Start Game" 
                     Clicked="StartGameButtonClicked" 
                     HorizontalOptions="FillAndExpand"
                     Grid.Column="1"
                     HeightRequest="45"
-                    Margin="5,0"/>
+                    Margin="5,0"
+                    BackgroundColor="#4CAF50"
+                    TextColor="#FFFFFF"
+                    CornerRadius="10"/>
 
             <Button Text="Go back"
                     Clicked="GoBackToModeChoiceButtonClicked"
                     HorizontalOptions="FillAndExpand"
                     Grid.Column="2"
                     HeightRequest="45"
-                    Margin="5,0"/>
+                    Margin="5,0"
+                    BackgroundColor="#4CAF50"
+                    TextColor="#FFFFFF"
+                    CornerRadius="10"/>
         </Grid>
     </Grid>
 </ContentPage>

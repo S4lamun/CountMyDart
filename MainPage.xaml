@@ -2,25 +2,34 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CountMyDartMaui.MainPage"
-             Title="">
+             Title="Count My Dart"
+             BackgroundColor="#1E1E1E">
 
     <Grid RowDefinitions="Auto, Auto, Auto, Auto, *"
           ColumnDefinitions="*, *, *"
           Padding="10">
 
-        <!-- Tytuł aplikacji -->
-        <Label x:Name="WelcomeLabel"
-               Text="Count My Dart!"
-               Grid.Column="1"
-               Grid.Row="0"
-               HorizontalOptions="Center"
-               VerticalOptions="Start"
-               FontSize="{OnPlatform Android=24, Default=28}"
-               FontAttributes="Bold"
-               Margin="0,10,0,20"
-               WidthRequest="200"/>
+        
+        <Border Grid.Column="0" Grid.ColumnSpan="3"
+                Grid.Row="0"
+                BackgroundColor="#333333"
+                Stroke="#FFD700"
+                StrokeThickness="2"
+                StrokeShape="RoundRectangle 10"
+                Padding="10"
+                HorizontalOptions="Fill"
+                VerticalOptions="Start"
+                Margin="0,10,0,20">
 
-        <!-- Ikona tarczy do darta -->
+            <Label Text="Count My Dart!"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   FontSize="{OnPlatform Android=24, Default=28}"
+                   FontAttributes="Bold"
+                   TextColor="#FFD700"/>
+        </Border>
+
+       
         <Image Source="dartboard.png"
                Grid.Column="1"
                Grid.Row="1"
@@ -29,52 +38,75 @@
                HorizontalOptions="Center"
                Margin="0,0,0,10"/>
 
-        <!-- Wybór liczby graczy -->
-        <VerticalStackLayout Grid.Row="2" Grid.Column="0"
+        
+        <VerticalStackLayout Grid.Row="2" Grid.ColumnSpan="2"
                              VerticalOptions="Center"
                              Spacing="10">
 
             <Label Text="Choose how many people will play:"
                    FontSize="16"
-                   HorizontalOptions="Center"/>
+                   HorizontalOptions="Center"
+                   TextColor="#FFFFFF"
+                   HorizontalTextAlignment="Center"/>
 
-            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
-                <Image Source="personicon.png"
-                       HeightRequest="40"
-                       WidthRequest="30"/>
-                <Picker x:Name="PlayerPicker"
-                        ItemsSource="{Binding PlayersAmount}"
-                        WidthRequest="200"
-                        HeightRequest="40"
-                        HorizontalTextAlignment="Center"
-                        SelectedIndexChanged="PlayerAmountChanged"
-                        BackgroundColor="White"/>
-            </HorizontalStackLayout>
+            <Border BackgroundColor="#333333"
+                    Stroke="#4CAF50"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 10"
+                    Padding="10"
+                    HorizontalOptions="Center"
+                    WidthRequest="250">
+
+                <HorizontalStackLayout Spacing="10">
+                    <Image Source="personicon.png"
+                           HeightRequest="40"
+                           WidthRequest="30"/>
+                    <Picker x:Name="PlayerPicker"
+                            ItemsSource="{Binding PlayersAmount}"
+                            WidthRequest="200"
+                            HeightRequest="40"
+                            HorizontalTextAlignment="Center"
+                            SelectedIndexChanged="PlayerAmountChanged"
+                            BackgroundColor="Transparent"
+                            TextColor="#FFFFFF"/>
+                </HorizontalStackLayout>
+            </Border>
         </VerticalStackLayout>
 
-        <!-- Wybór trybu gry (pod wyborem liczby graczy) -->
-        <VerticalStackLayout Grid.Row="3" Grid.Column="0"
+        <VerticalStackLayout Grid.Row="3" Grid.ColumnSpan="2"
                              VerticalOptions="Center"
-                             Spacing="20">
+                             Spacing="10"
+                             Margin="0,30,0,0">
 
             <Label Text="Choose game mode:"
                    FontSize="16"
-                   HorizontalOptions="Center"/>
+                   HorizontalOptions="Center"   
+                   TextColor="#FFFFFF"
+                   HorizontalTextAlignment="Center"/>
 
-            <HorizontalStackLayout HorizontalOptions="Center">
-                <Image Source="controller.png"
-                       WidthRequest="40"/>
-                <Picker x:Name="GamePicker"
-                        ItemsSource="{Binding TypeOfGame}"
-                        WidthRequest="200"
-                        HeightRequest="40"
-                        HorizontalTextAlignment="Center"
-                        SelectedIndexChanged="GameTypeChanged"
-                        BackgroundColor="White"/>
-            </HorizontalStackLayout>
+            <Border BackgroundColor="#333333"
+                    Stroke="#4CAF50"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 10"
+                    Padding="10"
+                    HorizontalOptions="Center">
+
+                <HorizontalStackLayout Spacing="10">
+                    <Image Source="controller.png"
+                           WidthRequest="40"/>
+                    <Picker x:Name="GamePicker"
+                            ItemsSource="{Binding TypeOfGame}"
+                            WidthRequest="200"
+                            HeightRequest="40"
+                            HorizontalTextAlignment="Center"
+                            SelectedIndexChanged="GameTypeChanged"
+                            BackgroundColor="Transparent"
+                            TextColor="#FFFFFF"/>
+                </HorizontalStackLayout>
+            </Border>
         </VerticalStackLayout>
 
-        <!-- Przycisk zatwierdzenia -->
+        
         <Button Text="Accept"
                 x:Name="AcceptButton"
                 Grid.Row="4"
@@ -83,8 +115,9 @@
                 HeightRequest="50"
                 VerticalOptions="End"
                 HorizontalOptions="Center"
-                Clicked="AcceptButtonClicked"/>
-
+                Clicked="AcceptButtonClicked"
+                BackgroundColor="#4CAF50"
+                TextColor="#FFFFFF"
+                CornerRadius="25"/>
     </Grid>
-
 </ContentPage>

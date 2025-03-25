@@ -106,18 +106,29 @@
             </Border>
         </VerticalStackLayout>
 
-        
-        <Button Text="Accept"
-                x:Name="AcceptButton"
-                Grid.Row="4"
+        <HorizontalStackLayout Grid.ColumnSpan="2" Grid.Row="4" Spacing="70">
+            <Button Text="Settings"
+                x:Name="SettingsButton"
                 Grid.Column="1"
-                WidthRequest="200"
+                WidthRequest="150"
                 HeightRequest="50"
                 VerticalOptions="End"
                 HorizontalOptions="Center"
-                Clicked="AcceptButtonClicked"
+                Clicked="SettingsButtonClicked"
                 BackgroundColor="#4CAF50"
                 TextColor="#FFFFFF"
                 CornerRadius="25"/>
+            <Button Text="Accept"
+             x:Name="AcceptButton"
+             Grid.Column="1"
+            WidthRequest="150"
+            HeightRequest="50"
+            VerticalOptions="End"
+            HorizontalOptions="Center"
+            Clicked="AcceptButtonClicked"
+            BackgroundColor="#4CAF50"
+            TextColor="#FFFFFF"
+            CornerRadius="25"/>
+        </HorizontalStackLayout>
     </Grid>
 </ContentPage>

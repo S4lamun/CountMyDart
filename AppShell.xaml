@@ -12,9 +12,10 @@
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
     <ShellContent Title="Players" Route="players" ContentTemplate="{DataTemplate local:PlayerPage}" />
-
+    <ShellContent Title="Settings" Route="settings" ContentTemplate="{DataTemplate local:SettingsPage}"/>
     <ShellContent Title="GamePage" Route="game" ContentTemplate="{DataTemplate local:GamePage}"/>
     <ShellContent Title="Scoreboard" Route="ScoreboardPage" ContentTemplate="{DataTemplate local:ScoreboardPage}"></ShellContent>
     <ShellContent Title="BotPage" Route="BotPage" ContentTemplate="{DataTemplate local:BotPage}"/>
+    <ShellContent Title="GamePageWithDartboard" Route="GamePageWithDartboard" ContentTemplate="{DataTemplate local:GamePageWithDartboard}"/>
 
 </Shell>

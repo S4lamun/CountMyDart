@@ -55,7 +55,11 @@
                 await Navigation.PushModalAsync(new BotPage(GameTypeChoosen));
                 return;
             }
-            await Navigation.PushModalAsync(new PlayerPage(GameTypeChoosen, PlayersAmountChoosen)); // Push Modal - you cant back to previous page
+                await Navigation.PushModalAsync(new PlayerPage(GameTypeChoosen, PlayersAmountChoosen)); // Push Modal - you cant back to previous page
+        }
+        private async void SettingsButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new SettingsPage());
         }
 
     }

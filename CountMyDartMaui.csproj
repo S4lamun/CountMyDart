@@ -68,9 +68,6 @@
 	  <MauiXaml Update="GamePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="GamePageWithDartboard.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="InteractiveDartboard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

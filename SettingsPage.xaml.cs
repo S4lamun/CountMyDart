@@ -4,12 +4,13 @@ namespace CountMyDartMaui;
 
 public partial class SettingsPage : ContentPage
 {
-
+    #region GlobalVaribles
     public ObservableCollection<string> languages { get; set; }
     public string selectedLanguage { get; set; }
 
     public ObservableCollection<string> inputModes { get; set; }
     public string selectedInputMode { get; set; }
+    #endregion
 
     public SettingsPage()
     {
@@ -28,29 +29,27 @@ public partial class SettingsPage : ContentPage
                 "Clicking on Board"
             };
 
-        selectedLanguage = languages[0];
-        selectedInputMode = inputModes[0];
+        selectedLanguage = Preferences.Get("Language", "");
+        selectedInputMode = Preferences.Get("Input Mode", "");
         BindingContext = this;
     }
 
     private async void ButtonClicked(object sender, EventArgs e)
-    {
-        GlobalSettings.SelectedLanguage = selectedLanguage;
-        GlobalSettings.SelectedInputMode = selectedInputMode;
+    { 
         await Navigation.PushModalAsync(new MainPage());
     }
 
-    private void InputSelectedChange(object sender, EventArgs e)
+    private void InputSelectedChanged(object sender, EventArgs e)
     {
         Picker picker = sender as Picker;
         int index = picker.SelectedIndex;
-        selectedInputMode = inputModes[index];
+        Preferences.Set("Input Mode", inputModes[index]);
     }
 
-    private void LanguageSelectedChange(object sender, EventArgs e)
+    private void LanguageSelectedChanged(object sender, EventArgs e)
     {
         Picker picker = sender as Picker;
         int index = picker.SelectedIndex;
-        selectedLanguage = languages[index];
+        Preferences.Set("Language", languages[index]);
     }
 }

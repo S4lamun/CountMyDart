@@ -10,12 +10,14 @@ public partial class BotPage : ContentPage
     int BotThrow2;
     int BotThrow3;
     #endregion 
+
     #region ForPlayer
     public Player Player { get; set; }
     int Throw1;
     int Throw2;
     int Throw3;
     #endregion
+
     #region roundText 
     string roundText;
 
@@ -34,7 +36,9 @@ public partial class BotPage : ContentPage
 
     int roundCounter; // counts how many rounds already passed
     #endregion // round number
+
     bool HardOrEasy; // type of bot if hard - true if easy - false
+
     public BotPage(int GameType)
 	{
         InitializeComponent();
@@ -48,7 +52,7 @@ public partial class BotPage : ContentPage
         Player.Throw1 = "0";
         Player.Throw2 = "0";
         Player.Throw3 = "0";
-
+        roundCounter = 1;
         RoundText = "Round " + roundCounter;
 		BindingContext = this;
 	}
@@ -113,11 +117,46 @@ public partial class BotPage : ContentPage
         OnPropertyChanged(nameof(RoundText));
     }
 
-    private void ThrowFocused(object sender, EventArgs e) // if throwEntry clicked then entry.Text is empty
+    private async void ThrowFocused(object sender, EventArgs e) // if throwEntry clicked then entry.Text is empty
     {
         if (sender is Entry entry)
         {
-            entry.Text = string.Empty;
+            
+            if(Preferences.Get("Input Mode", "") == "Inserting manually")
+            {
+                entry.Text = string.Empty;
+            }
+            else if (Preferences.Get("Input Mode", "") == "Clicking on Board")
+            {
+                entry.Text = string.Empty;
+                GlobalSettings.CurrentThrow = -1;
+
+                try
+                {
+                    await Shell.Current.GoToAsync(nameof(InteractiveDartboard));
+
+                    while (GlobalSettings.CurrentThrow == -1)
+                    {
+                        await Task.Delay(100);
+                    }
+                    entry.Text = GlobalSettings.CurrentThrow.ToString();
+
+                }
+                catch (Exception ex)
+                {
+                    await DisplayAlert("Navigation Error", ex.Message, "OK");
+                }
+            }
         }
+    }
+
+    protected override bool OnBackButtonPressed()
+    {
+        return true;
+    }
+
+    private void EndGameButtonClicked(object sender, EventArgs e)
+    {
+        Navigation.PushModalAsync(new MainPage());
     }
 }

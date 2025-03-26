@@ -39,7 +39,7 @@ public partial class GamePage : ContentPage, INotifyPropertyChanged
     public GamePage(int typeOfGame, ObservableCollection<Player> players)
     {
         InitializeComponent();
-        
+
 
         PointsToGain = typeOfGame;
         roundCounter = 1;
@@ -50,7 +50,7 @@ public partial class GamePage : ContentPage, INotifyPropertyChanged
         PlayersToRemove = new();
         foreach (var player in players)
         {
-            player.Throw1 = "0"; 
+            player.Throw1 = "0";
             player.Throw2 = "0";
             player.Throw3 = "0";
         }
@@ -66,23 +66,27 @@ public partial class GamePage : ContentPage, INotifyPropertyChanged
     {
         foreach (var player in Players) // Validation of Input
         {
-            if (!int.TryParse(player.Throw1, out Throw1) || !int.TryParse(player.Throw2, out Throw2) || !int.TryParse(player.Throw3, out Throw3 ) || Throw1 < 0 || Throw1 > 60 || Throw2 < 0 || Throw2 > 60 || Throw3 < 0 || Throw3 > 60)
+            if (!int.TryParse(player.Throw1, out Throw1) || !int.TryParse(player.Throw2, out Throw2) ||
+                !int.TryParse(player.Throw3, out Throw3)
+                || Throw1 < 0 || Throw1 > 60 || Throw2 < 0 || Throw2 > 60 || Throw3 < 0 || Throw3 > 60)
             {
                 await DisplayAlert("Error", "Please enter a valid number", "OK");
                 return;
             }
-            
-            if (player.TargetPoints < (Throw1+Throw2+Throw3))
+
+            if (player.TargetPoints < (Throw1 + Throw2 + Throw3))
             {
                 await DisplayAlert("Error", $"Player {player.Name} threw too much!", "Ok");
             }
-        
+
             if (player.TargetPoints >= (Throw1 + Throw2 + Throw3))
             {
                 player.TargetPoints -= (Throw1 + Throw2 + Throw3);
             }
 
         }
+
+        PlayersToRemove.Clear();
 
         foreach (var player in Players) // setting Throws as default - 0
         {
@@ -102,28 +106,57 @@ public partial class GamePage : ContentPage, INotifyPropertyChanged
         RoundText = $"Round {++roundCounter}";
         OnPropertyChanged(nameof(RoundText));
 
-        if (PlayersToRemove.Count() > 0)
+
+        if (PlayersToRemove.Any())
         {
             foreach (var p in PlayersToRemove) // Removes players if he ended game
             {
                 Players.Remove(p);
             }
-            PlayersToRemove.Clear();
+
+
 
             var tempPlayers = Players;
             Players = null;
             OnPropertyChanged(nameof(Players));
             Players = tempPlayers;
             OnPropertyChanged(nameof(Players));
+
+
         }
 
     }
 
-    private void ThrowFocused(object sender, EventArgs e) // if throwEntry clicked then entry.Text is empty
+    private async void ThrowFocused(object sender, EventArgs e) // if throwEntry clicked then entry.Text is empty
     {
         if (sender is Entry entry)
         {
-            entry.Text = string.Empty;
+            if (Preferences.Get("Input Mode", "") == "Inserting manually")
+            {
+                entry.Text = string.Empty;
+            }
+            if (Preferences.Get("Input Mode", "") == "Clicking on Board")
+            {
+                entry.Text = string.Empty;
+                GlobalSettings.CurrentThrow = -1;
+                try
+                {
+                    await Shell.Current.GoToAsync(nameof(InteractiveDartboard));
+
+                    while (GlobalSettings.CurrentThrow == -1)
+                    {
+                        await Task.Delay(100);
+                    }
+
+                    entry.Text = GlobalSettings.CurrentThrow.ToString();
+                    //Traci focus
+
+                }
+                catch (Exception ex)
+                {
+                    await DisplayAlert("Navigation Error", ex.Message, "OK");
+                }
+            }
         }
     }
 
@@ -135,7 +168,7 @@ public partial class GamePage : ContentPage, INotifyPropertyChanged
 
             if ((string)entry.Text != validInput) // We changed only if validInput is different
             {
-                    entry.Text = validInput;
+                entry.Text = validInput;
             }
         }
     }

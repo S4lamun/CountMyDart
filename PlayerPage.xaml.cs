@@ -89,15 +89,18 @@ public partial class PlayerPage : ContentPage
             return;
         }
 
-        if(GlobalSettings.SelectedInputMode == "Inserting manually")
+        /*string inputMode = Preferences.Get("Input Mode", "");
+        if(inputMode == "Inserting manually")
         {
             await Navigation.PushModalAsync(new GamePage(GameType, Players));
         }
-        else if(GlobalSettings.SelectedInputMode == "Clicking on Board")
+        else if(inputMode == "Clicking on Board")
         {
             await Navigation.PushModalAsync(new GamePageWithDartboard(GameType, Players));
         }
-            
+        */
+        await Navigation.PushModalAsync(new GamePage(GameType, Players));
+
     }
 
     private async void GoBackToModeChoiceButtonClicked(object sender, EventArgs e)

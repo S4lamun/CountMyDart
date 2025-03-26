@@ -63,7 +63,7 @@ namespace CountMyDartMaui
             {
                 int score = CalculateScoreFromTapPosition(tapPoint.Value, ((VisualElement)sender).Width, ((VisualElement)sender).Height);
                 GlobalSettings.CurrentThrow = score;
-                Shell.Current.GoToAsync("..");
+                await Shell.Current.GoToAsync("..");
             }
         }
 
@@ -106,7 +106,7 @@ namespace CountMyDartMaui
             if (distance < doubleRingInner)
                 return score; // Normal Sector
 
-            return 0; // Poza tarcz¹
+            return 0; // Beyond board
         }
 
         private void DisplayScore(int score)

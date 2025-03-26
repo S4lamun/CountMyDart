@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace CountMyDartMaui
 {
-   public static class GlobalSettings
+   public static class GlobalSettings // Class for Variables which are needed to be stored between Pages
     {
-        public static string SelectedLanguage { get; set; } 
-        public static string SelectedInputMode { get; set; } 
-
-        public static int CurrentThrow { get; set; } 
+      public static int CurrentThrow { get; set; } 
     }
 }

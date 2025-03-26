@@ -7,7 +7,6 @@
 
     <VerticalStackLayout Spacing="20" Padding="20">
 
-        <!-- Sekcja rundy -->
         <Label Text="{Binding RoundText}" 
                FontSize="24" 
                HorizontalOptions="Center" 
@@ -15,7 +14,6 @@
                FontAttributes="Bold"
                Margin="0,0,0,20"/>
 
-        <!-- Sekcja gracza -->
         <Border BackgroundColor="#8B0000" 
                 Padding="15" 
                 StrokeShape="RoundRectangle 10">
@@ -66,10 +64,10 @@
             </VerticalStackLayout>
         </Border>
 
-        <!-- Większy odstęp między graczem a botem -->
+
         <BoxView HeightRequest="20" Color="#1E1E1E"/>
 
-        <!-- Sekcja bota -->
+
         <Border BackgroundColor="#8B0000" 
                 Padding="15" 
                 StrokeShape="RoundRectangle 10">
@@ -91,15 +89,26 @@
             </VerticalStackLayout>
         </Border>
 
-        <!-- Przycisk "Accept Throws" na dole -->
-        <Button Text="Accept Throws" 
-                Clicked="AcceptThrowsButtonClicked" 
-                HorizontalOptions="FillAndExpand" 
-                BackgroundColor="#4CAF50" 
-                TextColor="#FFFFFF" 
-                CornerRadius="10" 
-                HeightRequest="50"
-                Margin="0,20,0,0"/>
+
+        <HorizontalStackLayout Spacing="70">
+            <Button Text="Accept Throws" 
+            Clicked="AcceptThrowsButtonClicked" 
+            HorizontalOptions="Start" 
+            BackgroundColor="#4CAF50" 
+            TextColor="#FFFFFF" 
+            CornerRadius="25" 
+            HeightRequest="50"
+            WidthRequest="150"/>
+
+            <Button Text="End Game Quicker"
+            Clicked="EndGameButtonClicked"
+            HorizontalOptions="End"
+            BackgroundColor="#4CAF50" 
+            CornerRadius="25" 
+            HeightRequest="50"
+            TextColor="#FFFFFF" 
+            WidthRequest="150"/>
+        </HorizontalStackLayout>
 
     </VerticalStackLayout>
 </ContentPage>

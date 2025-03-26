@@ -6,7 +6,6 @@
 
     <ScrollView HorizontalScrollBarVisibility="Default">
         <VerticalStackLayout Padding="10" Spacing="15">
-            <Label Text="Default GamePage"></Label>
             <Label Text="{Binding RoundText, Mode=TwoWay}" 
                    FontSize="24" 
                    HorizontalOptions="Center" 

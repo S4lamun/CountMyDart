@@ -127,6 +127,7 @@ public partial class GamePage : ContentPage, INotifyPropertyChanged
 
     }
 
+    /*
     private async void ThrowFocused(object sender, EventArgs e) // if throwEntry clicked then entry.Text is empty
     {
         if (sender is Entry entry)
@@ -157,6 +158,33 @@ public partial class GamePage : ContentPage, INotifyPropertyChanged
                     await DisplayAlert("Navigation Error", ex.Message, "OK");
                 }
             }
+        }
+    }
+    */
+    private async void OnEntryTapped(object sender, EventArgs e)
+    {
+        if (sender is Entry entry)
+        {
+            entry.Text = string.Empty;
+            if (Preferences.Get("Input Mode", "") == "Clicking on Board")
+            {
+                GlobalSettings.CurrentThrow = -1;
+                try
+                {
+                    await Shell.Current.GoToAsync(nameof(InteractiveDartboard));
+                    while (GlobalSettings.CurrentThrow == -1)
+                    {
+                        await Task.Delay(100);
+                    }
+                    entry.Text = GlobalSettings.CurrentThrow.ToString();
+                    //Traci focus
+                }
+                catch (Exception ex)
+                {
+                    await DisplayAlert("Navigation Error", ex.Message, "OK");
+                }
+            }
+           
         }
     }
 

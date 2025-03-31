@@ -70,13 +70,37 @@ public partial class GamePage : ContentPage, INotifyPropertyChanged
                 !int.TryParse(player.Throw3, out Throw3)
                 || Throw1 < 0 || Throw1 > 60 || Throw2 < 0 || Throw2 > 60 || Throw3 < 0 || Throw3 > 60)
             {
-                await DisplayAlert("Error", "Please enter a valid number", "OK");
-                return;
+                if(Preferences.Get("AppLanguage", "")=="en")
+                {
+                    await DisplayAlert("Error", "Please enter a valid number", "OK");
+                    return;
+                }
+                else if(Preferences.Get("AppLanguage", "") == "pl")
+                {
+                    await DisplayAlert("B³¹d", "Wpisz prawid³ow¹ liczbê", "OK");
+                    return;
+                }
+                else if(Preferences.Get("AppLangauge", "") == "de")
+                {
+                    await DisplayAlert("Fehler", "Bitte geben Sie die richtige Nummer ein", "Ok");
+                }
             }
 
             if (player.TargetPoints < (Throw1 + Throw2 + Throw3))
             {
-                await DisplayAlert("Error", $"Player {player.Name} threw too much!", "Ok");
+                if (Preferences.Get("AppLanguage", "") == "en")
+                {
+                    await DisplayAlert("Error", $"Player {player.Name} threw too much!", "OK");
+                }
+                else if (Preferences.Get("AppLanguage", "") == "pl")
+                {
+                    await DisplayAlert("B³¹d", $"Gracz {player.Name} rzuci³ za du¿o", "OK");
+                }
+                else if (Preferences.Get("AppLangauge", "") == "de")
+                {
+                    await DisplayAlert("Fehler", $"Spieler {player.Name} hat zu viel geworfen", "Ok");
+                }
+                
             }
 
             if (player.TargetPoints >= (Throw1 + Throw2 + Throw3))
@@ -95,15 +119,40 @@ public partial class GamePage : ContentPage, INotifyPropertyChanged
             player.Throw3 = "0";
             if (player.TargetPoints == 0) // Communicate if player ended
             {
-                await DisplayAlert("Success", $"Player {player.Name} won game!", "Ok");
-                player.EndCommunicate = "Ended game";
+                if (Preferences.Get("AppLanguage", "") == "en")
+                {
+                    await DisplayAlert("Success", $"Player {player.Name} ended game", "Ok");
+                    player.EndCommunicate = "Ended game";
+                }
+                else if (Preferences.Get("AppLanguage", "") == "pl")
+                {
+                    await DisplayAlert("Sukces", $"Gracz {player.Name} skoñczy³ grê", "Ok");
+                    player.EndCommunicate = "Zakoñczy³ grê";
+                }
+                else if (Preferences.Get("AppLanguage", "") == "de")
+                {
+                    await DisplayAlert("Erfolg", $"Spieler {player.Name} hat das Spiel beendet", "Ok");
+                    player.EndCommunicate = "Er beendete das Spiel";
+                }
                 PlayerScoreboard.Add(player, roundCounter);
                 PlayersToRemove.Add(player);
 
             }
         }
 
-        RoundText = $"Round {++roundCounter}";
+        if (Preferences.Get("AppLanguage", "") == "en")
+        {
+            RoundText = $"Round {++roundCounter}";
+        }
+        else if (Preferences.Get("AppLanguage", "") == "pl")
+        {
+            RoundText = $"Runda {++roundCounter}";
+        }
+        else if (Preferences.Get("AppLanguage", "") == "de")
+        {
+            RoundText = $"Runde {++roundCounter}";
+        }
+
         OnPropertyChanged(nameof(RoundText));
 
 
@@ -127,40 +176,7 @@ public partial class GamePage : ContentPage, INotifyPropertyChanged
 
     }
 
-    /*
-    private async void ThrowFocused(object sender, EventArgs e) // if throwEntry clicked then entry.Text is empty
-    {
-        if (sender is Entry entry)
-        {
-            if (Preferences.Get("Input Mode", "") == "Inserting manually")
-            {
-                entry.Text = string.Empty;
-            }
-            if (Preferences.Get("Input Mode", "") == "Clicking on Board")
-            {
-                entry.Text = string.Empty;
-                GlobalSettings.CurrentThrow = -1;
-                try
-                {
-                    await Shell.Current.GoToAsync(nameof(InteractiveDartboard));
-
-                    while (GlobalSettings.CurrentThrow == -1)
-                    {
-                        await Task.Delay(100);
-                    }
-
-                    entry.Text = GlobalSettings.CurrentThrow.ToString();
-                    //Traci focus
-
-                }
-                catch (Exception ex)
-                {
-                    await DisplayAlert("Navigation Error", ex.Message, "OK");
-                }
-            }
-        }
-    }
-    */
+   
     private async void OnEntryTapped(object sender, EventArgs e)
     {
         if (sender is Entry entry)
@@ -177,7 +193,7 @@ public partial class GamePage : ContentPage, INotifyPropertyChanged
                         await Task.Delay(100);
                     }
                     entry.Text = GlobalSettings.CurrentThrow.ToString();
-                    //Traci focus
+                    
                 }
                 catch (Exception ex)
                 {
@@ -206,7 +222,19 @@ public partial class GamePage : ContentPage, INotifyPropertyChanged
         Players.OrderByDescending(p => p.TargetPoints);
         foreach (var player in Players)
         {
-            player.EndCommunicate = $"[didn't end, left to score {player.TargetPoints}]";
+            if(Preferences.Get("AppLanguage", "") == "en")
+            {
+                player.EndCommunicate = $"[didn't end, left to score: {player.TargetPoints}]";
+            }
+            else if (Preferences.Get("AppLanguage", "") == "pl")
+            {
+                player.EndCommunicate = $"[nie zakoñczy³, pozosta³o: {player.TargetPoints}]";
+            }
+            else if (Preferences.Get("AppLanguage", "") == "de")
+            {
+                player.EndCommunicate = $"[nicht beendet, links: {player.TargetPoints}]";
+            }
+            
             PlayerScoreboard.Add(player, roundCounter);
         }
         await Navigation.PushModalAsync(new ScoreboardPage(PlayerScoreboard));

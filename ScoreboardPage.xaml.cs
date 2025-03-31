@@ -16,16 +16,39 @@ public partial class ScoreboardPage : ContentPage
         Counter = 2;
         Players = new();
 
-        if (!playerScoreboard.Keys.Any(x => x.EndCommunicate == "Ended game"))
+        if (!playerScoreboard.Keys.Any(x => x.EndCommunicate == "Ended game") && !playerScoreboard.Keys.Any(x => x.EndCommunicate == "Zakoñczy³ grê") 
+            && !playerScoreboard.Keys.Any(x => x.EndCommunicate == "Er beendete das Spiel"))
         {
-            WinnerText.Text = "No winner!";
+            if (Preferences.Get("AppLanguage", "") == "en")
+            {
+                WinnerText.Text = "No winner!";
+            }
+            else if (Preferences.Get("AppLanguage", "") == "pl")
+            {
+                WinnerText.Text = "Brak zwyciêzcy!";
+            }
+            else if (Preferences.Get("AppLanguage", "") == "de")
+            {
+                WinnerText.Text = "Kein Gewinner!";
+            }
             WinnerRounds.Text = string.Empty;
             return;
         }
 
         var winner = playerScoreboard.OrderBy(x => x.Value).First();
         WinnerText.Text = winner.Key.Name;
-        WinnerRounds.Text = $"Won in {winner.Value} rounds!";
+        if (Preferences.Get("AppLanguage", "") == "en")
+        {
+            WinnerRounds.Text = $"Won in {winner.Value} rounds!";
+        }
+        else if (Preferences.Get("AppLanguage", "") == "pl")
+        {
+            WinnerRounds.Text = $"Wygra³ w {winner.Value} rund!";
+        }
+        else if (Preferences.Get("AppLanguage", "") == "de")
+        {
+            WinnerRounds.Text = $"Gewonnen in {winner.Value} Runden!";
+        }
 
         PlayerScoreboard.Remove(winner.Key);
 

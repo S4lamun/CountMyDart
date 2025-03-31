@@ -43,8 +43,19 @@ public partial class PlayerPage : ContentPage
     {
         if (string.IsNullOrEmpty(EnterPlayerName.Text))
         {
+            if(Preferences.Get("AppLanguage", "") == "en")
             {
                 await DisplayAlert("Error", "Write Nickname!", "Ok");
+                return;
+            }
+            else if (Preferences.Get("AppLanguage", "") == "pl")
+            {
+                await DisplayAlert("B³¹d", "Wpisz Imiê", "Ok");
+                return;
+            }
+            else if (Preferences.Get("AppLanguage", "") == "de")
+            {
+                await DisplayAlert("Fehler", "Schreiben Sie den Spitznamen!", "Ok");
                 return;
             }
         }
@@ -53,8 +64,22 @@ public partial class PlayerPage : ContentPage
 
         if (nickname.Length < 3 || nickname.Length > 8)
         {
-            await DisplayAlert("Error", "Nickname is invalid (3-8 letters)!", "Ok");
-            return;
+            if(Preferences.Get("AppLanguage", "") == "en")
+            {
+                await DisplayAlert("Error", "Nickname is invalid (3-8 letters)!", "Ok");
+                return;
+            }
+            else if (Preferences.Get("AppLanguage", "") == "pl")
+            {
+                await DisplayAlert("B³¹d", "Imiê jest niepoprawne (3-8 liter)!", "Ok");
+                return;
+            }
+            else if (Preferences.Get("AppLanguage", "") == "de")
+            {
+                await DisplayAlert("Fehler", "Spitzname ist ungültig (3-8 Buchstaben)!", "Ok");
+                return;
+            }
+            
         }
 
         if (nickname.All(char.IsUpper))
@@ -65,14 +90,42 @@ public partial class PlayerPage : ContentPage
 
         if (Players.Any(t => t.Name == nickname))
         {
-            await DisplayAlert("Error", "This Player was already addded!", "Ok");
-            return;
+            if(Preferences.Get("AppLanguage", "") == "en")
+            {
+                await DisplayAlert("Error", "This Player was already addded!", "Ok");
+                return;
+            }
+            else if (Preferences.Get("AppLanguage", "") == "pl")
+            {
+                await DisplayAlert("B³¹d", "Ten gracz zosta³ ju¿ dodany!", "Ok");
+                return;
+            }
+            else if (Preferences.Get("AppLanguage", "") == "de")
+            {
+                await DisplayAlert("Fehler", "Dieser Spieler wurde bereits hinzugefügt!", "Ok");
+                return;
+            }
+            
         }
 
         if (Counter >= PlayerAmount)
         {
-            await DisplayAlert("Error", "All players already added", "Ok");
-            return;
+            if(Preferences.Get("AppLanguage", "") == "en")
+            {
+                await DisplayAlert("Error", "All players already added", "Ok");
+                return;
+            }
+            else if (Preferences.Get("AppLanguage", "") == "pl")
+            {
+                await DisplayAlert("B³¹d", "Wszyscy gracze zostali ju¿ dodani", "Ok");
+                return;
+            }
+            else if (Preferences.Get("AppLanguage", "") == "de")
+            {
+                await DisplayAlert("Fehler", "Alle Spieler wurden bereits hinzugefügt", "Ok");
+                return;
+            }
+           
         }
 
         Players.Add(new Player(nickname, GameType));
@@ -85,20 +138,24 @@ public partial class PlayerPage : ContentPage
     {
         if (Counter < PlayerAmount)
         {
-            await DisplayAlert("Error", $"To start game you need to add {PlayerAmount - Counter} Players", "Ok");
-            return;
+            if (Preferences.Get("AppLanguage", "") == "en")
+            {
+                await DisplayAlert("Error", $"To start game you need to add {PlayerAmount - Counter} Players", "Ok");
+                return;
+            }
+            else if (Preferences.Get("AppLanguage", "") == "pl")
+            {
+                await DisplayAlert("B³¹d", $"Aby rozpocz¹æ grê musisz dodaæ {PlayerAmount - Counter} graczy", "Ok");
+                return;
+            }
+
+            else if (Preferences.Get("AppLanguage", "") == "de")
+            {
+                await DisplayAlert("Fehler", $"Um das Spiel zu starten, müssen Sie {PlayerAmount - Counter} Spieler hinzufügen", "Ok");
+            }
+                       
         }
 
-        /*string inputMode = Preferences.Get("Input Mode", "");
-        if(inputMode == "Inserting manually")
-        {
-            await Navigation.PushModalAsync(new GamePage(GameType, Players));
-        }
-        else if(inputMode == "Clicking on Board")
-        {
-            await Navigation.PushModalAsync(new GamePageWithDartboard(GameType, Players));
-        }
-        */
         await Navigation.PushModalAsync(new GamePage(GameType, Players));
 
     }

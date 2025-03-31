@@ -1,5 +1,6 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CountMyDartMaui.Resources.Localization"
              x:Class="CountMyDartMaui.ScoreboardPage"
              Title=""
              BackgroundColor="#1E1E1E">
@@ -7,7 +8,7 @@
     <ScrollView HorizontalScrollBarVisibility="Default">
         <VerticalStackLayout Padding="10" Spacing="10">
 
-            <Label Text="SCOREBOARD" 
+            <Label Text="{x:Static local:AppResources.ScoreboardPageTitle}" 
                    FontSize="30" 
                    HorizontalOptions="Center" 
                    FontAttributes="Bold" 
@@ -22,7 +23,7 @@
                        Grid.Column="0"
                        VerticalOptions="Center"/>
 
-                <Label Text="Winner: " 
+                <Label Text="{x:Static local:AppResources.ScoreboardPageWinner} " 
                        FontSize="26" 
                        FontAttributes="Bold" 
                        Grid.Row="0"
@@ -75,7 +76,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Button Text="Start new game!" 
+            <Button Text="{x:Static local:AppResources.ScoreboardPageButton1}" 
                     Clicked="StartNewGameButtonClicked" 
                     WidthRequest="250"
                     HorizontalOptions="Center"

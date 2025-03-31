@@ -1,5 +1,7 @@
 ﻿
+using CountMyDartMaui.Resources.Localization;
 using System.Diagnostics;
+using System.Globalization;
 namespace CountMyDartMaui
 {
     public enum GameType { Game101 = 101, Game201 = 201, Game301 = 301, Game401 = 401, Game501 = 501, YouVsBotEASY = 111, YouVsBotHARD = 112 }
@@ -14,21 +16,29 @@ namespace CountMyDartMaui
         int GameTypeChoosen; // what type of game they will play
         #endregion
 
+        public static void LoadCulture()
+        {
+            if (!Preferences.ContainsKey("Language"))
+            {
+                Preferences.Set("AppLanguage", "en");
+            }
+            string lang = Preferences.Get("AppLanguage", "");
+            CultureInfo culture = new CultureInfo(lang);
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
+            AppResources.Culture = culture; // Ustawienie kultury w AppResources
+        }
 
         public MainPage()
         {
+            LoadCulture();
             InitializeComponent();
-
             //Checking if there are any preferences saved if not we give default option
             if (!Preferences.ContainsKey("Input Mode"))
             {
                 Preferences.Set("Input Mode", "Inserting manually");
             }
-            if (!Preferences.ContainsKey("Language"))
-            {
-                Preferences.Set("Language", "English");
-            }
-
+           
             BindingContext = this;
             GamePicker.SelectedIndex = 0;
             PlayerPicker.SelectedIndex = 0;

@@ -53,7 +53,19 @@ public partial class BotPage : ContentPage
         Player.Throw2 = "0";
         Player.Throw3 = "0";
         roundCounter = 1;
-        RoundText = "Round " + roundCounter;
+        if (Preferences.Get("AppLanguage", "") == "en")
+        {
+            RoundText = "Round " + roundCounter;
+        }
+        else if (Preferences.Get("AppLanguage", "") == "pl")
+        {
+            RoundText = "Runda " + roundCounter;
+        }
+        else if (Preferences.Get("AppLanguage", "") == "de")
+        {
+            RoundText = "Runde " + roundCounter;
+        }
+           
 		BindingContext = this;
 	}
 
@@ -62,12 +74,37 @@ public partial class BotPage : ContentPage
         #region Logic for Player
         if (!int.TryParse(Player.Throw1, out Throw1) || !int.TryParse(Player.Throw2, out Throw2) || !int.TryParse(Player.Throw3, out Throw3) || Throw1 < 0 || Throw1 > 60 || Throw2 <0 || Throw2 > 60 || Throw3<0 || Throw3>60  )
 		{
-            await DisplayAlert("Error", "Please enter a valid number", "OK");
-            return;
+            if(Preferences.Get("AppLanguage", "") == "en")
+            {
+                await DisplayAlert("Error", "Please enter a valid number", "OK");
+                return;
+            }
+            else if (Preferences.Get("AppLanguage", "") == "pl")
+            {
+                await DisplayAlert("B³¹d", "Proszê wprowadziæ poprawn¹ liczbê", "OK");
+                return;
+            }
+            else if (Preferences.Get("AppLanguage", "") == "de")
+            {
+                await DisplayAlert("Fehler", "Bitte geben Sie eine gültige Nummer ein", "OK");
+                return;
+            }
+            
         }
         if (Player.TargetPoints < (Throw1 + Throw2 + Throw3))
         {
-            await DisplayAlert("Error", "You threw too much!", "Ok");
+            if(Preferences.Get("AppLanguage", "") == "en")
+            {
+                await DisplayAlert("Error", "You threw too much!", "Ok");
+            }
+            else if (Preferences.Get("AppLanguage", "") == "pl")
+            {
+                await DisplayAlert("B³¹d", "Rzuci³eœ za du¿o!", "Ok");
+            }
+            else if (Preferences.Get("AppLanguage", "") == "de")
+            {
+                await DisplayAlert("Fehler", "Du hast zu viel geworfen!", "Ok");
+            }
         }
         if (Player.TargetPoints >= (Throw1 + Throw2 + Throw3))
         {
@@ -91,29 +128,85 @@ public partial class BotPage : ContentPage
 
         if (Bot.TargetPoints < (BotThrow1 + BotThrow2 + BotThrow3))
         {
-            await DisplayAlert("Error", $"Bot scored: {Bot.Throw1}, {Bot.Throw2}, {Bot.Throw3}." + " Bot threw too much!", "Ok");
+            if (Preferences.Get("AppLanguage", "") == "en")
+            {
+                await DisplayAlert("Error", $"Bot scored: {Bot.Throw1}, {Bot.Throw2}, {Bot.Throw3}." + " Bot threw too much!", "Ok");
+            }
+            else if(Preferences.Get("AppLanguage", "") == "pl")
+            {
+                await DisplayAlert("B³¹d", $"Bot wyrzuci³: {Bot.Throw1}, {Bot.Throw2}, {Bot.Throw3}." + " Bot rzuci³ za du¿o!", "Ok");
+            }
+            else if(Preferences.Get("AppLanguage", "") == "de")
+            {
+                await DisplayAlert("Fehler", $"Bot hat geworfen: {Bot.Throw1}, {Bot.Throw2}, {Bot.Throw3}." + " Bot hat zu viel geworfen!", "Ok");
+            }
         }
 
         if (Bot.TargetPoints >= (BotThrow1 + BotThrow2 + BotThrow3))
         {
             Bot.TargetPoints -= (BotThrow1 + BotThrow2 + BotThrow3);
-            await DisplayAlert("Information", $"Bot scored: {Bot.Throw1}, {Bot.Throw2}, {Bot.Throw3}", "OK");
+            if(Preferences.Get("AppLanguage", "") == "en")
+            {
+                await DisplayAlert("Information", $"Bot scored: {Bot.Throw1}, {Bot.Throw2}, {Bot.Throw3}", "OK");
+            }
+            else if (Preferences.Get("AppLanguage", "") == "pl")
+            {
+                await DisplayAlert("Informacja", $"Bot wyrzuci³: {Bot.Throw1}, {Bot.Throw2}, {Bot.Throw3}", "OK");
+            }
+            else if (Preferences.Get("AppLanguage", "") == "de")
+            {
+                await DisplayAlert("Information", $"Bot hat geworfen: {Bot.Throw1}, {Bot.Throw2}, {Bot.Throw3}", "OK");
+            }
         }
         #endregion
 
         if (Player.TargetPoints == 0)
         {
-            await DisplayAlert("Success!", $"You won game in {roundCounter} rounds! Left to score by Bot: {Bot.TargetPoints}", "OK");
+            if (Preferences.Get("AppLanguage", "") == "en")
+            {
+                await DisplayAlert("Success!", $"You won game in {roundCounter} rounds! Left to score by Bot: {Bot.TargetPoints}", "OK");
+            }
+            else if (Preferences.Get("AppLanguage", "") == "pl")
+            {
+                await DisplayAlert("Sukces!", $"Wygra³eœ grê w {roundCounter} rundach! Pozosta³o do zdobycia przez Bota: {Bot.TargetPoints}", "OK");
+            }
+            else if (Preferences.Get("AppLanguage", "") == "de")
+            {
+                await DisplayAlert("Erfolg!", $"Du hast das Spiel in {roundCounter} Runden gewonnen! Links zu Punkten von Bot: {Bot.TargetPoints}", "OK");
+            }
+
             await Navigation.PushModalAsync(new MainPage());
         }
        
         if (Bot.TargetPoints == 0)
         {
-            await DisplayAlert("Failure!", $"You lost game! Bot ended in {roundCounter} rounds. Left to score: {Player.TargetPoints}", "OK");
+            if (Preferences.Get("AppLanguage", "") == "en")
+            {
+                await DisplayAlert("Failure!", $"You lost game! Bot ended in {roundCounter} rounds. Left to score: {Player.TargetPoints}", "OK");
+            }
+            else if (Preferences.Get("AppLanguage", "") == "pl")
+            {
+                await DisplayAlert("Pora¿ka!", $"Przegra³eœ grê! Bot zakoñczy³ w {roundCounter} rundach. Pozosta³o do zdobycia: {Player.TargetPoints}", "OK");
+            }
+            else if (Preferences.Get("AppLanguage", "") == "de")
+            {
+                await DisplayAlert("Fehler!", $"Du hast das Spiel verloren! Bot hat in {roundCounter} Runden beendet. Links zu Punkten: {Player.TargetPoints}", "OK");
+            }
+
             await Navigation.PushModalAsync(new MainPage());
         }
-
-        RoundText = "Round " + ++roundCounter;
+        if (Preferences.Get("AppLanguage", "") == "en")
+        {
+            RoundText = "Round " + ++roundCounter;
+        }
+        else if (Preferences.Get("AppLanguage", "") == "pl")
+        {
+            RoundText = "Runda " + ++roundCounter;
+        }
+        else if (Preferences.Get("AppLanguage", "") == "de")
+        {
+            RoundText = "Runde " + ++roundCounter;
+        }
         OnPropertyChanged(nameof(RoundText));
     }
 

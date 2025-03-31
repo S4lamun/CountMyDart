@@ -1,5 +1,6 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CountMyDartMaui.Resources.Localization"
              x:Class="CountMyDartMaui.PlayerPage"
              Title=""
              BackgroundColor="#1E1E1E">
@@ -7,12 +8,12 @@
     <Grid RowDefinitions="Auto, *, Auto" Padding="20">
 
         <VerticalStackLayout Grid.Row="0" Spacing="10">
-            <Label Text="Enter Player Name" 
+            <Label Text="{x:Static local:AppResources.PlayerPageEnterPlayerName}" 
                    HorizontalOptions="Center" 
                    FontSize="24" 
                    FontAttributes="Bold" 
                    TextColor="#FFD700"/>
-            <Entry Placeholder="Enter Player Name" 
+            <Entry Placeholder="{x:Static local:AppResources.PlayerPageEnterPlayerName}" 
                    x:Name="EnterPlayerName"
                    HorizontalOptions="Fill" 
                    Margin="0,0,0,10"
@@ -31,7 +32,7 @@
                             <SwipeItems Mode="Execute">
                                 <SwipeItem BackgroundColor="#8B0000"
                                            Invoked="OnDeletePlayer"
-                                           Text="DELETE"/>
+                                           Text="{x:Static local:AppResources.PlayerPageDelete}"/>
                             </SwipeItems>
                         </SwipeView.LeftItems>
                         <StackLayout Padding="10">
@@ -51,7 +52,7 @@
         </CollectionView>
 
         <Grid Grid.Row="2" ColumnDefinitions="*, *, *" ColumnSpacing="10">
-            <Button Text="Add Player" 
+            <Button Text="{x:Static local:AppResources.PlayerPageButton1}" 
                     Clicked="AddPlayerButtonClicked" 
                     HorizontalOptions="FillAndExpand"
                     Grid.Column="0"
@@ -61,7 +62,7 @@
                     TextColor="#FFFFFF"
                     CornerRadius="10"/>
 
-            <Button Text="Start Game" 
+            <Button Text="{x:Static local:AppResources.PlayerPageButton2}" 
                     Clicked="StartGameButtonClicked" 
                     HorizontalOptions="FillAndExpand"
                     Grid.Column="1"
@@ -71,7 +72,7 @@
                     TextColor="#FFFFFF"
                     CornerRadius="10"/>
 
-            <Button Text="Go back"
+            <Button Text="{x:Static local:AppResources.PlayerPageButton3}"
                     Clicked="GoBackToModeChoiceButtonClicked"
                     HorizontalOptions="FillAndExpand"
                     Grid.Column="2"

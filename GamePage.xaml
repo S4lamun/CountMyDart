@@ -1,5 +1,6 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CountMyDartMaui.Resources.Localization"
              x:Class="CountMyDartMaui.GamePage"
              Title="Default GamePage"
              BackgroundColor="#1E1E1E">
@@ -31,7 +32,7 @@
                                        LineBreakMode="WordWrap" 
                                        TextColor="#FFFFFF"/>
                                 <VerticalStackLayout Grid.Column="1">
-                                    <Label Text="To Gain:" 
+                                    <Label Text="{x:Static local:AppResources.GamePagePointsToGain}" 
                                            FontAttributes="Bold" 
                                            HorizontalTextAlignment="Center" 
                                            TextColor="#FFFFFF"/>
@@ -42,7 +43,7 @@
                                            TextColor="#FFFFFF"/>
                                 </VerticalStackLayout>
                                 <VerticalStackLayout Grid.Column="2" Spacing="5">
-                                    <Label Text="Throws:" 
+                                    <Label Text="{x:Static local:AppResources.GamePageThrows}" 
                                            FontAttributes="Bold" 
                                            FontSize="16" 
                                            HorizontalTextAlignment="Center"
@@ -108,7 +109,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Button Text="Accept All Throws" 
+            <Button Text="{x:Static local:AppResources.GamePageButton1}" 
                     Clicked="AcceptAllThrowsButtonClicked" 
                     x:Name="AcceptButton" 
                     WidthRequest="200" 
@@ -117,7 +118,7 @@
                     TextColor="#FFFFFF"
                     CornerRadius="10"/>
 
-            <Button Text="End Game" 
+            <Button Text="{x:Static local:AppResources.GamePageButton2}" 
                     Clicked="EndGameButtonClicked" 
                     x:Name="EndGameButton" 
                     WidthRequest="200" 

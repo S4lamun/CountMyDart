@@ -1,89 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:CountMyDartMaui.Resources.Localization"
              x:Class="CountMyDartMaui.ScoreboardPage"
-             Title=""
-             BackgroundColor="#1E1E1E">
+             Title="">
 
-    <ScrollView HorizontalScrollBarVisibility="Default">
-        <VerticalStackLayout Padding="10" Spacing="10">
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#121212" Offset="0.0" />
+            <GradientStop Color="#1E1E1E" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <Grid RowDefinitions="Auto, *" Padding="15">
+       
+        <Border Grid.Row="0"
+                Stroke="#CC0000"
+                StrokeThickness="2"
+                StrokeShape="RoundRectangle 15"
+                Padding="15"
+                Margin="0,10,0,20">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#222222" Offset="0.0" />
+                    <GradientStop Color="#333333" Offset="1.0" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <Border.Shadow>
+                <Shadow Brush="#CC0000"
+                        Offset="0,3"
+                        Radius="5"
+                        Opacity="0.5" />
+            </Border.Shadow>
 
             <Label Text="{x:Static local:AppResources.ScoreboardPageTitle}" 
-                   FontSize="30" 
+                   FontSize="32" 
                    HorizontalOptions="Center" 
                    FontAttributes="Bold" 
-                   TextColor="#FFD700"/>
+                   TextColor="#FFD700">
+                <Label.Shadow>
+                    <Shadow Brush="#000000"
+                            Offset="1,1"
+                            Radius="1"
+                            Opacity="0.7" />
+                </Label.Shadow>
+            </Label>
+        </Border>
 
-            <Grid RowDefinitions="Auto,Auto,Auto" 
-                  ColumnDefinitions="Auto, *" 
-                  Padding="20">
-                <Image Source="firstplace.png" 
-                       WidthRequest="50"
-                       Grid.Row="0"
-                       Grid.Column="0"
-                       VerticalOptions="Center"/>
+        
+        <ScrollView Grid.Row="1" HorizontalScrollBarVisibility="Default">
+            <VerticalStackLayout Spacing="20">
+               
+                <Border StrokeThickness="2"
+                        StrokeShape="RoundRectangle 20"
+                        Margin="0,0,0,15">
+                    <Border.Stroke>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#FFD700" Offset="0.0" />
+                            <GradientStop Color="#FFA500" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Border.Stroke>
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#222222" Offset="0.0" />
+                            <GradientStop Color="#2A2A2A" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Border.Shadow>
+                        <Shadow Brush="#FFD700"
+                                Offset="0,3"
+                                Radius="8"
+                                Opacity="0.4" />
+                    </Border.Shadow>
 
-                <Label Text="{x:Static local:AppResources.ScoreboardPageWinner} " 
-                       FontSize="26" 
-                       FontAttributes="Bold" 
-                       Grid.Row="0"
-                       Grid.Column="1"
-                       VerticalOptions="Center"
-                       TextColor="#FFFFFF"/>
+                    <Grid RowDefinitions="Auto, Auto, Auto" 
+                          ColumnDefinitions="Auto, *" 
+                          Padding="20">
+                        <Image Source="firstplace.png" 
+                               WidthRequest="60"
+                               Grid.Row="0"
+                               Grid.RowSpan="3" 
+                               Grid.Column="0"
+                               VerticalOptions="Center">
+                            <Image.Shadow>
+                                <Shadow Brush="#FFFFFF"
+                                        Offset="0,0"
+                                        Radius="10"
+                                        Opacity="0.5" />
+                            </Image.Shadow>
+                        </Image>
 
-                <Label x:Name="WinnerText" 
-                       FontSize="24" 
-                       FontAttributes="Bold"
-                       Grid.Row="1"
-                       Grid.Column="1"
-                       HorizontalTextAlignment="Center"
-                       TextColor="#FFFFFF"/>
+                        <Label Text="{x:Static local:AppResources.ScoreboardPageWinner}" 
+                               FontSize="28" 
+                               FontAttributes="Bold" 
+                               Grid.Row="0"
+                               Grid.Column="1"
+                               VerticalOptions="Center"
+                               TextColor="#FFD700">
+                            <Label.Shadow>
+                                <Shadow Brush="#000000"
+                                        Offset="1,1"
+                                        Radius="1"
+                                        Opacity="0.5" />
+                            </Label.Shadow>
+                        </Label>
 
-                <Label x:Name="WinnerRounds" 
-                       FontSize="24"
-                       Grid.Row="2"
-                       FontAttributes="Bold"
-                       Grid.Column="1"
-                       HorizontalTextAlignment="Center"
-                       TextColor="#FFFFFF"/>
-            </Grid>
-
-            <CollectionView ItemsSource="{Binding Players}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Border Padding="10" 
-                                Margin="5" 
-                                BackgroundColor="#8B0000">
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="10" />
-                            </Border.StrokeShape>
-                            <HorizontalStackLayout Spacing="5">
-                                <Label Text="{Binding Place}" 
-                                       FontSize="17" 
-                                       FontAttributes="Bold"
-                                       TextColor="#FFFFFF"/>
-                                <Label Text="{Binding Name}" 
-                                       FontSize="17" 
-                                       FontAttributes="Bold"
-                                       TextColor="#FFFFFF"/>
-                                <Label Text="{Binding EndCommunicate}" 
-                                       FontSize="17" 
-                                       FontAttributes="Bold"
-                                       TextColor="#FFFFFF"/>
-                            </HorizontalStackLayout>
+                        <Border Grid.Row="1"
+                                Grid.Column="1"
+                                BackgroundColor="#2D2D2D"
+                                StrokeThickness="1.5"
+                                Stroke="#4CAF50"
+                                StrokeShape="RoundRectangle 12"
+                                Padding="15,8"
+                                Margin="0,10,0,10"
+                                HorizontalOptions="Center">
+                            <Border.Shadow>
+                                <Shadow Brush="#4CAF50"
+                                        Offset="0,2"
+                                        Radius="5"
+                                        Opacity="0.3" />
+                            </Border.Shadow>
+                            <Label x:Name="WinnerText" 
+                                   FontSize="26" 
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="#FFFFFF">
+                                <Label.Shadow>
+                                    <Shadow Brush="#000000"
+                                            Offset="1,1"
+                                            Radius="1"
+                                            Opacity="0.5" />
+                                </Label.Shadow>
+                            </Label>
                         </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
 
-            <Button Text="{x:Static local:AppResources.ScoreboardPageButton1}" 
-                    Clicked="StartNewGameButtonClicked" 
-                    WidthRequest="250"
-                    HorizontalOptions="Center"
-                    BackgroundColor="#4CAF50"
-                    TextColor="#FFFFFF"
-                    CornerRadius="10"/>
+                        <Border Grid.Row="2"
+                                Grid.Column="1"
+                                BackgroundColor="#2D2D2D"
+                                StrokeThickness="1.5"
+                                Stroke="#CC0000"
+                                StrokeShape="RoundRectangle 12"
+                                Padding="15,8"
+                                HorizontalOptions="Center">
+                            <Border.Shadow>
+                                <Shadow Brush="#CC0000"
+                                        Offset="0,2"
+                                        Radius="5"
+                                        Opacity="0.3" />
+                            </Border.Shadow>
+                            <Label x:Name="WinnerRounds" 
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="#FFFFFF">
+                                <Label.Shadow>
+                                    <Shadow Brush="#000000"
+                                            Offset="1,1"
+                                            Radius="1"
+                                            Opacity="0.5" />
+                                </Label.Shadow>
+                            </Label>
+                        </Border>
+                    </Grid>
+                </Border>
 
-        </VerticalStackLayout>
-    </ScrollView>
+                
+                <Label Text="{x:Static local:AppResources.ScoreboardPageRanking}" 
+                       FontSize="22" 
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="#FFFFFF"
+                       Margin="0,0,0,10">
+                    <Label.Shadow>
+                        <Shadow Brush="#000000"
+                                Offset="1,1"
+                                Radius="1"
+                                Opacity="0.5" />
+                    </Label.Shadow>
+                </Label>
+
+                <CollectionView ItemsSource="{Binding Players}"
+                               Margin="0,0,0,20">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="15" 
+                                    Margin="0,0,0,10" 
+                                    StrokeThickness="1.5"
+                                    StrokeShape="RoundRectangle 15">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="#8B0000" Offset="0.0" />
+                                        <GradientStop Color="#A50000" Offset="1.0" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <Border.Shadow>
+                                    <Shadow Brush="#8B0000"
+                                            Offset="0,3"
+                                            Radius="6"
+                                            Opacity="0.4" />
+                                </Border.Shadow>
+
+                                <Grid ColumnDefinitions="Auto, Auto, *">
+                                    
+                                    <Border Grid.Column="0"
+                                            BackgroundColor="#222222"
+                                            StrokeThickness="1"
+                                            Stroke="#FFD700"
+                                            StrokeShape="RoundRectangle 10"
+                                            WidthRequest="40"
+                                            HeightRequest="40"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center"
+                                            Margin="0,0,15,0">
+                                        <Label Text="{Binding Place}" 
+                                               FontSize="20" 
+                                               FontAttributes="Bold"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"
+                                               TextColor="#FFD700"/>
+                                    </Border>
+
+                                    
+                                    <Label Grid.Column="1"
+                                           Text="{Binding Name}" 
+                                           FontSize="18" 
+                                           FontAttributes="Bold"
+                                           VerticalOptions="Center"
+                                           Margin="0,0,10,0"
+                                           TextColor="#FFFFFF">
+                                        <Label.Shadow>
+                                            <Shadow Brush="#000000"
+                                                    Offset="1,1"
+                                                    Radius="1"
+                                                    Opacity="0.5" />
+                                        </Label.Shadow>
+                                    </Label>
+
+                                    
+                                    <Label Grid.Column="2"
+                                           Text="{Binding EndCommunicate}" 
+                                           FontSize="18" 
+                                           FontAttributes="Bold"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="End"
+                                           TextColor="#FFFFFF">
+                                        <Label.Shadow>
+                                            <Shadow Brush="#000000"
+                                                    Offset="1,1"
+                                                    Radius="1"
+                                                    Opacity="0.5" />
+                                        </Label.Shadow>
+                                    </Label>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                
+                <Button Text="{x:Static local:AppResources.ScoreboardPageButton1}" 
+                        Clicked="StartNewGameButtonClicked" 
+                        WidthRequest="280"
+                        HeightRequest="55"
+                        HorizontalOptions="Center"
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        CornerRadius="28"
+                        Margin="0,10,0,30">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#4CAF50" Offset="0.0" />
+                            <GradientStop Color="#388E3C" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <Button.Shadow>
+                        <Shadow Brush="#4CAF50"
+                                Offset="0,4"
+                                Radius="8"
+                                Opacity="0.5" />
+                    </Button.Shadow>
+                </Button>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

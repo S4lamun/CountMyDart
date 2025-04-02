@@ -189,4 +189,10 @@
   <data name="BotPageButton2" xml:space="preserve">
     <value>End game quicker</value>
   </data>
+  <data name="ScoreboardPageRanking" xml:space="preserve">
+    <value>Player Ranking </value>
+  </data>
+  <data name="PlayerPageNoPlayers" xml:space="preserve">
+    <value>No players have been added</value>
+  </data>
 </root>

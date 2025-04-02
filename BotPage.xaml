@@ -4,112 +4,290 @@
              xmlns:local="clr-namespace:CountMyDartMaui.Resources.Localization"
              x:Class="CountMyDartMaui.BotPage"
              Title=""
-             BackgroundColor="#1E1E1E">
+             BackgroundColor="#121212">
 
-    <VerticalStackLayout Spacing="20" Padding="20">
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#121212" Offset="0.0" />
+            <GradientStop Color="#1E1E1E" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
 
-        <Label Text="{Binding RoundText}" 
-               FontSize="24" 
-               HorizontalOptions="Center" 
-               TextColor="#FFD700" 
-               FontAttributes="Bold"
-               Margin="0,0,0,20"/>
+    <Grid RowDefinitions="Auto, Auto, Auto, Auto, *" Padding="20">
 
-        <Border BackgroundColor="#8B0000" 
-                Padding="15" 
-                StrokeShape="RoundRectangle 10">
+        <Border Grid.Row="0"
+                Stroke="#CC0000"
+                StrokeThickness="2"
+                StrokeShape="RoundRectangle 15"
+                Padding="15"
+                HorizontalOptions="Fill"
+                VerticalOptions="Start"
+                Margin="0,10,0,25">
+
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#222222" Offset="0.0" />
+                    <GradientStop Color="#333333" Offset="1.0" />
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Border.Shadow>
+                <Shadow Brush="#CC0000"
+                        Offset="0,3"
+                        Radius="5"
+                        Opacity="0.5" />
+            </Border.Shadow>
+
+            <Label Text="{Binding RoundText}" 
+                   FontSize="{OnPlatform Android=22, Default=24}" 
+                   HorizontalOptions="Center" 
+                   TextColor="#CC0000" 
+                   FontAttributes="Bold">
+                <Label.Shadow>
+                    <Shadow Brush="#000000"
+                            Offset="1,1"
+                            Radius="1"
+                            Opacity="0.7" />
+                </Label.Shadow>
+            </Label>
+        </Border>
+
+        <Border Grid.Row="1"
+                Stroke="#CC0000"
+                StrokeThickness="1.5"
+                StrokeShape="RoundRectangle 12"
+                Padding="15"
+                HorizontalOptions="Fill"
+                Margin="0,0,0,25">
+
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#222222" Offset="0.0" />
+                    <GradientStop Color="#2A2A2A" Offset="1.0" />
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Border.Shadow>
+                <Shadow Brush="#CC0000"
+                        Offset="0,2"
+                        Radius="4"
+                        Opacity="0.3" />
+            </Border.Shadow>
+
             <VerticalStackLayout Spacing="15">
                 <Label Text="{x:Static local:AppResources.BotPageYourPointsToGain}" 
                        FontSize="18" 
                        FontAttributes="Bold" 
-                       TextColor="#FFFFFF"/>
+                       TextColor="#FFFFFF">
+                    <Label.Shadow>
+                        <Shadow Brush="#000000"
+                                Offset="1,1"
+                                Radius="1"
+                                Opacity="0.5" />
+                    </Label.Shadow>
+                </Label>
+
                 <Border BackgroundColor="#333333" 
-                Padding="10" 
-                StrokeShape="RoundRectangle 10">
+                        Stroke="#4CAF50"
+                        StrokeThickness="1"
+                        Padding="10" 
+                        StrokeShape="RoundRectangle 10">
+                    <Border.Shadow>
+                        <Shadow Brush="#4CAF50"
+                                Offset="0,2"
+                                Radius="4"
+                                Opacity="0.3" />
+                    </Border.Shadow>
                     <Label Text="{Binding Player.TargetPoints}" 
-                       FontSize="24"
-                       FontAttributes="Bold"
-                       TextColor="#FFFFFF"
-                       HorizontalOptions="Center"/>
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="#FFFFFF"
+                           HorizontalOptions="Center">
+                        <Label.Shadow>
+                            <Shadow Brush="#000000"
+                                    Offset="1,1"
+                                    Radius="1"
+                                    Opacity="0.5" />
+                        </Label.Shadow>
+                    </Label>
                 </Border>
+
                 <Label Text="{x:Static local:AppResources.BotPageYourThrows}" 
                        FontSize="18" 
                        FontAttributes="Bold" 
-                       TextColor="#FFFFFF"/>
-                <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
-                    <Entry Text="{Binding Player.Throw1, Mode=TwoWay}" 
-                           Keyboard="Numeric" 
-                           Placeholder="0" 
-                           Focused="ThrowFocused" 
-                           WidthRequest="80"
-                           TextColor="#FFFFFF"
-                           BackgroundColor="#333333"
-                           HorizontalTextAlignment="Center"/>
-                    <Entry Text="{Binding Player.Throw2, Mode=TwoWay}" 
-                           Keyboard="Numeric" 
-                           Placeholder="0" 
-                           Focused="ThrowFocused" 
-                           WidthRequest="80"
-                           TextColor="#FFFFFF"
-                           BackgroundColor="#333333"
-                           HorizontalTextAlignment="Center"/>
-                    <Entry Text="{Binding Player.Throw3, Mode=TwoWay}" 
-                           Keyboard="Numeric" 
-                           Placeholder="0" 
-                           Focused="ThrowFocused" 
-                           WidthRequest="80"
-                           TextColor="#FFFFFF"
-                           BackgroundColor="#333333"
-                           HorizontalTextAlignment="Center"/>
+                       TextColor="#FFFFFF">
+                    <Label.Shadow>
+                        <Shadow Brush="#000000"
+                                Offset="1,1"
+                                Radius="1"
+                                Opacity="0.5" />
+                    </Label.Shadow>
+                </Label>
+
+                <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
+                    <Frame BackgroundColor="#252525"
+                           BorderColor="#4CAF50"
+                           CornerRadius="8"
+                           Padding="5"
+                           HasShadow="True">
+                        <Entry Text="{Binding Player.Throw1, Mode=TwoWay}" 
+                               Keyboard="Numeric" 
+                               Placeholder="0" 
+                               Focused="ThrowFocused" 
+                               WidthRequest="80"
+                               TextColor="#FFFFFF"
+                               BackgroundColor="Transparent"
+                               HorizontalTextAlignment="Center"/>
+                    </Frame>
+
+                    <Frame BackgroundColor="#252525"
+                           BorderColor="#4CAF50"
+                           CornerRadius="8"
+                           Padding="5"
+                           HasShadow="True">
+                        <Entry Text="{Binding Player.Throw2, Mode=TwoWay}" 
+                               Keyboard="Numeric" 
+                               Placeholder="0" 
+                               Focused="ThrowFocused" 
+                               WidthRequest="80"
+                               TextColor="#FFFFFF"
+                               BackgroundColor="Transparent"
+                               HorizontalTextAlignment="Center"/>
+                    </Frame>
+
+                    <Frame BackgroundColor="#252525"
+                           BorderColor="#4CAF50"
+                           CornerRadius="8"
+                           Padding="5"
+                           HasShadow="True">
+                        <Entry Text="{Binding Player.Throw3, Mode=TwoWay}" 
+                               Keyboard="Numeric" 
+                               Placeholder="0" 
+                               Focused="ThrowFocused" 
+                               WidthRequest="80"
+                               TextColor="#FFFFFF"
+                               BackgroundColor="Transparent"
+                               HorizontalTextAlignment="Center"/>
+                    </Frame>
                 </HorizontalStackLayout>
             </VerticalStackLayout>
         </Border>
 
+        <Border Grid.Row="2"
+                Stroke="#CC0000"
+                StrokeThickness="1.5"
+                StrokeShape="RoundRectangle 12"
+                Padding="15"
+                HorizontalOptions="Fill"
+                Margin="0,0,0,25">
 
-        <BoxView HeightRequest="20" Color="#1E1E1E"/>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#222222" Offset="0.0" />
+                    <GradientStop Color="#2A2A2A" Offset="1.0" />
+                </LinearGradientBrush>
+            </Border.Background>
 
+            <Border.Shadow>
+                <Shadow Brush="#CC0000"
+                        Offset="0,2"
+                        Radius="4"
+                        Opacity="0.3" />
+            </Border.Shadow>
 
-        <Border BackgroundColor="#8B0000" 
-                Padding="15" 
-                StrokeShape="RoundRectangle 10">
             <VerticalStackLayout Spacing="15">
                 <Label Text="{x:Static local:AppResources.BotPageBotPointsToGain}" 
                        FontSize="18" 
                        FontAttributes="Bold" 
                        TextColor="#FFFFFF"
-                       HorizontalOptions="Center"/>
+                       HorizontalOptions="Center">
+                    <Label.Shadow>
+                        <Shadow Brush="#000000"
+                                Offset="1,1"
+                                Radius="1"
+                                Opacity="0.5" />
+                    </Label.Shadow>
+                </Label>
+
                 <Border BackgroundColor="#333333" 
+                        Stroke="#4CAF50"
+                        StrokeThickness="1"
                         Padding="10" 
                         StrokeShape="RoundRectangle 10">
+                    <Border.Shadow>
+                        <Shadow Brush="#4CAF50"
+                                Offset="0,2"
+                                Radius="4"
+                                Opacity="0.3" />
+                    </Border.Shadow>
                     <Label Text="{Binding Bot.TargetPoints}" 
                            FontSize="24" 
                            FontAttributes="Bold" 
                            TextColor="#FFFFFF"
-                           HorizontalOptions="Center"/>
+                           HorizontalOptions="Center">
+                        <Label.Shadow>
+                            <Shadow Brush="#000000"
+                                    Offset="1,1"
+                                    Radius="1"
+                                    Opacity="0.5" />
+                        </Label.Shadow>
+                    </Label>
                 </Border>
             </VerticalStackLayout>
         </Border>
 
-
-        <HorizontalStackLayout Spacing="70">
+        <Grid Grid.Row="3" ColumnDefinitions="*, *" RowDefinitions="*">
             <Button Text="{x:Static local:AppResources.BotPageButton1}" 
-            Clicked="AcceptThrowsButtonClicked" 
-            HorizontalOptions="Start" 
-            BackgroundColor="#4CAF50" 
-            TextColor="#FFFFFF" 
-            CornerRadius="25" 
-            HeightRequest="50"
-            WidthRequest="150"/>
+                    Clicked="AcceptThrowsButtonClicked" 
+                    Grid.Column="0"
+                    WidthRequest="160"
+                    HeightRequest="55"
+                    VerticalOptions="End"
+                    HorizontalOptions="End"
+                    Margin="0,0,10,0"
+                    TextColor="#FFFFFF"
+                    FontAttributes="Bold"
+                    FontSize="16"
+                    CornerRadius="28">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#4CAF50" Offset="0.0" />
+                        <GradientStop Color="#388E3C" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Shadow>
+                    <Shadow Brush="#4CAF50"
+                            Offset="0,3"
+                            Radius="6"
+                            Opacity="0.5" />
+                </Button.Shadow>
+            </Button>
 
             <Button Text="{x:Static local:AppResources.BotPageButton2}"
-            Clicked="EndGameButtonClicked"
-            HorizontalOptions="End"
-            BackgroundColor="#4CAF50" 
-            CornerRadius="25" 
-            HeightRequest="50"
-            TextColor="#FFFFFF" 
-            WidthRequest="150"/>
-        </HorizontalStackLayout>
-
-    </VerticalStackLayout>
+                    Clicked="EndGameButtonClicked"
+                    Grid.Column="1"
+                    WidthRequest="160"
+                    HeightRequest="55"
+                    VerticalOptions="End"
+                    HorizontalOptions="Start"
+                    Margin="10,0,0,0"
+                    TextColor="#FFFFFF"
+                    FontAttributes="Bold"
+                    FontSize="16"
+                    CornerRadius="28">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#CC0000" Offset="0.0" />
+                        <GradientStop Color="#AA0000" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Shadow>
+                    <Shadow Brush="#CC0000"
+                            Offset="0,3"
+                            Radius="6"
+                            Opacity="0.5" />
+                </Button.Shadow>
+            </Button>
+        </Grid>
+    </Grid>
 </ContentPage>

@@ -1,132 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:CountMyDartMaui.Resources.Localization"
              x:Class="CountMyDartMaui.GamePage"
-             Title="Default GamePage"
-             BackgroundColor="#1E1E1E">
+             Title="Default GamePage">
 
-    <ScrollView HorizontalScrollBarVisibility="Default">
-        <VerticalStackLayout Padding="10" Spacing="15">
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#121212" Offset="0.0" />
+            <GradientStop Color="#1E1E1E" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <Grid RowDefinitions="Auto, *" Padding="15">
+        <!-- Header z informacja o rundzie -->
+        <Border Grid.Row="0"
+                Stroke="#CC0000"
+                StrokeThickness="2"
+                StrokeShape="RoundRectangle 15"
+                Padding="15"
+                Margin="0,10,0,20">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#222222" Offset="0.0" />
+                    <GradientStop Color="#333333" Offset="1.0" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <Border.Shadow>
+                <Shadow Brush="#CC0000"
+                        Offset="0,3"
+                        Radius="5"
+                        Opacity="0.5" />
+            </Border.Shadow>
+
             <Label Text="{Binding RoundText, Mode=TwoWay}" 
-                   FontSize="24" 
+                   FontSize="28" 
                    HorizontalOptions="Center" 
                    TextColor="#FFD700" 
-                   FontAttributes="Bold"/>
+                   FontAttributes="Bold">
+                <Label.Shadow>
+                    <Shadow Brush="#000000"
+                            Offset="1,1"
+                            Radius="1"
+                            Opacity="0.7" />
+                </Label.Shadow>
+            </Label>
+        </Border>
 
-            <CollectionView ItemsSource="{Binding Players}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:Name="PlayerTemplate">
-                        <Border Padding="15" 
-                                Margin="5" 
-                                BackgroundColor="#8B0000">
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="10" />
-                            </Border.StrokeShape>
-                            <Grid ColumnDefinitions="Auto, *, Auto, Auto">
-                                <Label Text="{Binding Name}" 
-                                       FontSize="20" 
-                                       FontAttributes="Bold" 
-                                       VerticalTextAlignment="Center"
-                                       Grid.Column="0"
-                                       WidthRequest="100"  
-                                       LineBreakMode="WordWrap" 
-                                       TextColor="#FFFFFF"/>
-                                <VerticalStackLayout Grid.Column="1">
-                                    <Label Text="{x:Static local:AppResources.GamePagePointsToGain}" 
-                                           FontAttributes="Bold" 
-                                           HorizontalTextAlignment="Center" 
-                                           TextColor="#FFFFFF"/>
-                                    <Label Text="{Binding TargetPoints}" 
-                                           FontSize="18" 
-                                           VerticalTextAlignment="Center" 
-                                           HorizontalTextAlignment="Center" 
-                                           TextColor="#FFFFFF"/>
-                                </VerticalStackLayout>
-                                <VerticalStackLayout Grid.Column="2" Spacing="5">
-                                    <Label Text="{x:Static local:AppResources.GamePageThrows}" 
-                                           FontAttributes="Bold" 
-                                           FontSize="16" 
-                                           HorizontalTextAlignment="Center"
-                                           TextColor="#FFFFFF"/>
-                                    <Grid ColumnSpacing="5">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <Entry Grid.Column="0" 
-                                                MinimumWidthRequest="40" 
-                                                HorizontalOptions="Fill" 
-                                                Keyboard="Numeric" 
-                                                Placeholder="0" 
-                                                Text="{Binding Throw1, Mode=TwoWay}" 
-                                                TextChanged="ThrowTextChanged" 
-                                                HorizontalTextAlignment="Center"
-                                                TextColor="#FFFFFF"
-                                                BackgroundColor="#333333">
-                                            <Entry.GestureRecognizers>
-                                                <TapGestureRecognizer Tapped="OnEntryTapped"/>
-                                            </Entry.GestureRecognizers>
-                                        </Entry>
+        <!-- Glowna zawartosc -->
+        <ScrollView Grid.Row="1" HorizontalScrollBarVisibility="Default">
+            <VerticalStackLayout Spacing="20">
+                <CollectionView ItemsSource="{Binding Players}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:Name="PlayerTemplate">
+                            <Border Margin="0,0,0,15" 
+                                    StrokeThickness="1.5"
+                                    Stroke="#CC0000"
+                                    StrokeShape="RoundRectangle 18">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="#222222" Offset="0.0" />
+                                        <GradientStop Color="#333333" Offset="1.0" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <Border.Shadow>
+                                    <Shadow Brush="#CC0000"
+                                            Offset="0,3"
+                                            Radius="8"
+                                            Opacity="0.4" />
+                                </Border.Shadow>
 
-                                        <Entry Grid.Column="1"  
-                                            MinimumWidthRequest="40" 
-                                            HorizontalOptions="Fill" 
-                                            Keyboard="Numeric" 
-                                            Placeholder="0" 
-                                            Text="{Binding Throw2, Mode=TwoWay}" 
-                                            TextChanged="ThrowTextChanged" 
-                                            HorizontalTextAlignment="Center"
-                                            TextColor="#FFFFFF"
-                                            BackgroundColor="#333333">
-                                            <Entry.GestureRecognizers>
-                                                <TapGestureRecognizer Tapped="OnEntryTapped"/>
-                                            </Entry.GestureRecognizers>
-                                        </Entry>
+                                <Grid ColumnDefinitions="Auto, *, Auto" Padding="15">
+                                    <!-- Nazwa gracza -->
+                                    <Border Grid.Column="0"
+                                            BackgroundColor="#222222"
+                                            StrokeShape="RoundRectangle 12"
+                                            Padding="12,8"
+                                            Margin="0,0,15,0"
+                                            WidthRequest="110"
+                                            HorizontalOptions="Start"
+                                            VerticalOptions="Center">
+                                        <Border.Stroke>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Color="#CC0000" Offset="0.0" />
+                                                <GradientStop Color="#4CAF50" Offset="1.0" />
+                                            </LinearGradientBrush>
+                                        </Border.Stroke>
+                                        <Border.Shadow>
+                                            <Shadow Brush="#000000"
+                                                    Offset="0,2"
+                                                    Radius="4"
+                                                    Opacity="0.4" />
+                                        </Border.Shadow>
 
-                                        <Entry Grid.Column="2"  
-                                            MinimumWidthRequest="40" 
-                                            HorizontalOptions="Fill" 
-                                            Keyboard="Numeric" 
-                                            Placeholder="0" 
-                                            Text="{Binding Throw3, Mode=TwoWay}" 
-                                            TextChanged="ThrowTextChanged" 
-                                            HorizontalTextAlignment="Center"
-                                            TextColor="#FFFFFF"
-                                            BackgroundColor="#333333">
-                                            <Entry.GestureRecognizers>
-                                                <TapGestureRecognizer Tapped="OnEntryTapped"/>
-                                            </Entry.GestureRecognizers>
-                                        </Entry>
-                                    </Grid>
-                                </VerticalStackLayout>
-                                <Image Grid.Column="3" 
-                                       Source="darts.png" 
-                                       WidthRequest="70"/>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                                        <Label Text="{Binding Name}" 
+                                               FontSize="20" 
+                                               FontAttributes="Bold" 
+                                               VerticalTextAlignment="Center"
+                                               HorizontalTextAlignment="Center"
+                                               LineBreakMode="WordWrap" 
+                                               TextColor="#FFFFFF">
+                                            <Label.Shadow>
+                                                <Shadow Brush="#000000"
+                                                        Offset="1,1"
+                                                        Radius="1"
+                                                        Opacity="0.5" />
+                                            </Label.Shadow>
+                                        </Label>
+                                    </Border>
 
-            <Button Text="{x:Static local:AppResources.GamePageButton1}" 
-                    Clicked="AcceptAllThrowsButtonClicked" 
-                    x:Name="AcceptButton" 
-                    WidthRequest="200" 
-                    HorizontalOptions="Start"
-                    BackgroundColor="#4CAF50"
-                    TextColor="#FFFFFF"
-                    CornerRadius="10"/>
+                                    <!-- Wyniki rzutow -->
+                                    <VerticalStackLayout Grid.Column="1" Spacing="10">
+                                        <Label Text="{x:Static local:AppResources.GamePageThrows}" 
+                                               FontAttributes="Bold" 
+                                               FontSize="18" 
+                                               HorizontalTextAlignment="Center"
+                                               TextColor="#FFD700">
+                                            <Label.Shadow>
+                                                <Shadow Brush="#000000"
+                                                        Offset="1,1"
+                                                        Radius="1"
+                                                        Opacity="0.5" />
+                                            </Label.Shadow>
+                                        </Label>
+                                        <Grid ColumnSpacing="8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
 
-            <Button Text="{x:Static local:AppResources.GamePageButton2}" 
-                    Clicked="EndGameButtonClicked" 
-                    x:Name="EndGameButton" 
-                    WidthRequest="200" 
-                    HorizontalOptions="Center"
-                    BackgroundColor="#4CAF50"
-                    TextColor="#FFFFFF"
-                    CornerRadius="10"/>
+                                            <!-- Rzut 1 -->
+                                            <Border Grid.Column="0"
+                                                    StrokeThickness="1.5"
+                                                    Stroke="#4CAF50"
+                                                    StrokeShape="RoundRectangle 12"
+                                                    BackgroundColor="#222222">
+                                                <Border.Shadow>
+                                                    <Shadow Brush="#4CAF50"
+                                                            Offset="0,2"
+                                                            Radius="4"
+                                                            Opacity="0.3" />
+                                                </Border.Shadow>
+                                                <Entry MinimumWidthRequest="40" 
+                                                       HorizontalOptions="Fill" 
+                                                       Keyboard="Numeric" 
+                                                       Placeholder="0" 
+                                                       Text="{Binding Throw1, Mode=TwoWay}" 
+                                                       TextChanged="ThrowTextChanged" 
+                                                       HorizontalTextAlignment="Center"
+                                                       TextColor="#FFFFFF"
+                                                       PlaceholderColor="#666666"
+                                                       BackgroundColor="Transparent">
+                                                    <Entry.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="OnEntryTapped"/>
+                                                    </Entry.GestureRecognizers>
+                                                </Entry>
+                                            </Border>
 
-        </VerticalStackLayout>
-    </ScrollView>
+                                            <!-- Rzut 2 -->
+                                            <Border Grid.Column="1"
+                                                    StrokeThickness="1.5"
+                                                    Stroke="#4CAF50"
+                                                    StrokeShape="RoundRectangle 12"
+                                                    BackgroundColor="#222222">
+                                                <Border.Shadow>
+                                                    <Shadow Brush="#4CAF50"
+                                                            Offset="0,2"
+                                                            Radius="4"
+                                                            Opacity="0.3" />
+                                                </Border.Shadow>
+                                                <Entry MinimumWidthRequest="40" 
+                                                       HorizontalOptions="Fill" 
+                                                       Keyboard="Numeric" 
+                                                       Placeholder="0" 
+                                                       Text="{Binding Throw2, Mode=TwoWay}" 
+                                                       TextChanged="ThrowTextChanged" 
+                                                       HorizontalTextAlignment="Center"
+                                                       TextColor="#FFFFFF"
+                                                       PlaceholderColor="#666666"
+                                                       BackgroundColor="Transparent">
+                                                    <Entry.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="OnEntryTapped"/>
+                                                    </Entry.GestureRecognizers>
+                                                </Entry>
+                                            </Border>
+
+                                            <!-- Rzut 3 -->
+                                            <Border Grid.Column="2"
+                                                    StrokeThickness="1.5"
+                                                    Stroke="#4CAF50"
+                                                    StrokeShape="RoundRectangle 12"
+                                                    BackgroundColor="#222222">
+                                                <Border.Shadow>
+                                                    <Shadow Brush="#4CAF50"
+                                                            Offset="0,2"
+                                                            Radius="4"
+                                                            Opacity="0.3" />
+                                                </Border.Shadow>
+                                                <Entry MinimumWidthRequest="40" 
+                                                       HorizontalOptions="Fill" 
+                                                       Keyboard="Numeric" 
+                                                       Placeholder="0" 
+                                                       Text="{Binding Throw3, Mode=TwoWay}" 
+                                                       TextChanged="ThrowTextChanged" 
+                                                       HorizontalTextAlignment="Center"
+                                                       TextColor="#FFFFFF"
+                                                       PlaceholderColor="#666666"
+                                                       BackgroundColor="Transparent">
+                                                    <Entry.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="OnEntryTapped"/>
+                                                    </Entry.GestureRecognizers>
+                                                </Entry>
+                                            </Border>
+                                        </Grid>
+                                    </VerticalStackLayout>
+
+                                    <!-- Punkty docelowe -->
+                                    <Border Grid.Column="2"
+                                            BackgroundColor="#222222" 
+                                            StrokeShape="RoundRectangle 12"
+                                            Padding="12,8"
+                                            Margin="15,0,0,0"
+                                            VerticalOptions="Center">
+                                        <Border.Stroke>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Color="#4CAF50" Offset="0.0" />
+                                                <GradientStop Color="#CC0000" Offset="1.0" />
+                                            </LinearGradientBrush>
+                                        </Border.Stroke>
+                                        <Border.Shadow>
+                                            <Shadow Brush="#000000"
+                                                    Offset="0,2"
+                                                    Radius="4"
+                                                    Opacity="0.4" />
+                                        </Border.Shadow>
+
+                                        <VerticalStackLayout Spacing="4">
+                                            <Label Text="{x:Static local:AppResources.GamePagePointsToGain}" 
+                                                   FontAttributes="Bold" 
+                                                   HorizontalTextAlignment="Center" 
+                                                   TextColor="#FFD700"/>
+                                            <Label Text="{Binding TargetPoints}" 
+                                                   FontSize="22" 
+                                                   FontAttributes="Bold"
+                                                   VerticalTextAlignment="Center" 
+                                                   HorizontalTextAlignment="Center" 
+                                                   TextColor="#FFFFFF">
+                                                <Label.Shadow>
+                                                    <Shadow Brush="#000000"
+                                                            Offset="1,1"
+                                                            Radius="1"
+                                                            Opacity="0.5" />
+                                                </Label.Shadow>
+                                            </Label>
+                                        </VerticalStackLayout>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Przyciski -->
+                <Grid ColumnDefinitions="*, *" ColumnSpacing="20" Margin="0,10,0,20">
+                    <!-- Przycisk akceptacji rzutow -->
+                    <Button Grid.Column="0"
+                            Text="{x:Static local:AppResources.GamePageButton1}" 
+                            Clicked="AcceptAllThrowsButtonClicked" 
+                            x:Name="AcceptButton" 
+                            HeightRequest="50"
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            CornerRadius="25">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#4CAF50" Offset="0.0" />
+                                <GradientStop Color="#388E3C" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                        <Button.Shadow>
+                            <Shadow Brush="#4CAF50"
+                                    Offset="0,3"
+                                    Radius="6"
+                                    Opacity="0.5" />
+                        </Button.Shadow>
+                    </Button>
+
+                    <!-- Przycisk zakonczenia gry -->
+                    <Button Grid.Column="1"
+                            Text="{x:Static local:AppResources.GamePageButton2}" 
+                            Clicked="EndGameButtonClicked" 
+                            x:Name="EndGameButton" 
+                            HeightRequest="50"
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            CornerRadius="25">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#CC0000" Offset="0.0" />
+                                <GradientStop Color="#AA0000" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                        <Button.Shadow>
+                            <Shadow Brush="#CC0000"
+                                    Offset="0,3"
+                                    Radius="6"
+                                    Opacity="0.5" />
+                        </Button.Shadow>
+                    </Button>
+                </Grid>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

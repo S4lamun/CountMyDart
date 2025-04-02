@@ -1,85 +1,204 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CountMyDartMaui.SettingsPage"
              Title=""
-             BackgroundColor="#1E1E1E">
-    <VerticalStackLayout Padding="40" Spacing="40">
+             BackgroundColor="#121212">
 
-        <Border BackgroundColor="#333333"
-                Stroke="#FFD700"
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#121212" Offset="0.0" />
+            <GradientStop Color="#1E1E1E" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <Grid RowDefinitions="Auto, Auto, Auto, Auto, *"
+          Padding="20">
+
+        <!-- Nagłówek Settings -->
+        <Border Grid.Row="0"
+                Stroke="#CC0000"
                 StrokeThickness="2"
-                StrokeShape="RoundRectangle 10"
-                Padding="10"
+                StrokeShape="RoundRectangle 15"
+                Padding="15"
                 HorizontalOptions="Fill"
                 VerticalOptions="Start"
-                Margin="0,10,0,20">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
+                Margin="0,10,0,30">
 
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#222222" Offset="0.0" />
+                    <GradientStop Color="#333333" Offset="1.0" />
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Border.Shadow>
+                <Shadow Brush="#CC0000"
+                        Offset="0,3"
+                        Radius="5"
+                        Opacity="0.5" />
+            </Border.Shadow>
+
+            <Grid ColumnDefinitions="Auto, *, Auto">
                 <Image Source="settingsicon.png"
                        Grid.Column="0"
-                       WidthRequest="50"
-                       HeightRequest="50"
+                       WidthRequest="40"
+                       HeightRequest="40"
                        HorizontalOptions="Start"
-                       VerticalOptions="Center"/>
+                       VerticalOptions="Center">
+                    <Image.Shadow>
+                        <Shadow Brush="#FFFFFF"
+                                Offset="0,0"
+                                Radius="5"
+                                Opacity="0.3" />
+                    </Image.Shadow>
+                </Image>
 
                 <Label Text="Settings"
                        Grid.Column="1"
-                       FontSize="24"  
-                       TextColor="#FFD700" 
+                       FontSize="{OnPlatform Android=24, Default=28}"
                        FontAttributes="Bold"
+                       TextColor="#CC0000"
                        HorizontalOptions="Center"
-                       VerticalOptions="Center"/>
+                       VerticalOptions="Center">
+                    <Label.Shadow>
+                        <Shadow Brush="#000000"
+                                Offset="1,1"
+                                Radius="1"
+                                Opacity="0.7" />
+                    </Label.Shadow>
+                </Label>
             </Grid>
         </Border>
 
-        <Border Stroke="#4CAF50"
-                BackgroundColor="#333333"
-                StrokeThickness="1"
-                StrokeShape="RoundRectangle 10"
-                Padding="10"
-                HorizontalOptions="Start"
-                WidthRequest="350">
-            <VerticalStackLayout>
-                <Label Text="Language:" FontSize="18" TextColor="AliceBlue" />
-                <Picker x:Name="LanguagePicker"
-                        ItemsSource="{Binding languages}"
-                        SelectedItem="{Binding selectedLanguage}"
-                        BackgroundColor="Transparent"
-                        TextColor="#FFFFFF"
-                        SelectedIndexChanged="LanguageSelectedChanged"/>
-            </VerticalStackLayout>
-        </Border>
-        <Border Stroke="#4CAF50"
-                BackgroundColor="#333333"
-                StrokeThickness="1"
-                StrokeShape="RoundRectangle 10"
-                Padding="10"
-                HorizontalOptions="Start"
-                WidthRequest="350">
-            <VerticalStackLayout>
-                <Label Text="Input Modes:" FontSize="18" TextColor="AliceBlue" />
-                <Picker x:Name="InputModePicker"
-                ItemsSource="{Binding inputModes}"
-                SelectedItem="{Binding selectedInputMode}"
-                BackgroundColor="Transparent"
-                TextColor="#FFFFFF"
-                SelectedIndexChanged="InputSelectedChanged"/>
+        <!-- Wybór Języka -->
+        <Border Grid.Row="1"
+                Stroke="#4CAF50"
+                StrokeThickness="1.5"
+                StrokeShape="RoundRectangle 12"
+                Padding="15"
+                HorizontalOptions="Fill"
+                Margin="0,0,0,25">
+
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#222222" Offset="0.0" />
+                    <GradientStop Color="#2A2A2A" Offset="1.0" />
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Border.Shadow>
+                <Shadow Brush="#4CAF50"
+                        Offset="0,2"
+                        Radius="4"
+                        Opacity="0.3" />
+            </Border.Shadow>
+
+            <VerticalStackLayout Spacing="10">
+                <Label Text="Language:"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="#FFFFFF">
+                    <Label.Shadow>
+                        <Shadow Brush="#000000"
+                                Offset="1,1"
+                                Radius="1"
+                                Opacity="0.5" />
+                    </Label.Shadow>
+                </Label>
+
+                <Frame BackgroundColor="#252525"
+                       BorderColor="#4CAF50"
+                       CornerRadius="8"
+                       Padding="5"
+                       HasShadow="False">
+                    <Picker x:Name="LanguagePicker"
+                            ItemsSource="{Binding languages}"
+                            SelectedItem="{Binding selectedLanguage}"
+                            BackgroundColor="Transparent"
+                            TextColor="#FFFFFF"
+                            FontSize="16"
+                            SelectedIndexChanged="LanguageSelectedChanged"/>
+                </Frame>
             </VerticalStackLayout>
         </Border>
 
-        <Button Text="Save changes and go back"
+        <!-- Tryby Wejścia -->
+        <Border Grid.Row="2"
+                Stroke="#4CAF50"
+                StrokeThickness="1.5"
+                StrokeShape="RoundRectangle 12"
+                Padding="15"
+                HorizontalOptions="Fill"
+                Margin="0,0,0,25">
+
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#222222" Offset="0.0" />
+                    <GradientStop Color="#2A2A2A" Offset="1.0" />
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Border.Shadow>
+                <Shadow Brush="#4CAF50"
+                        Offset="0,2"
+                        Radius="4"
+                        Opacity="0.3" />
+            </Border.Shadow>
+
+            <VerticalStackLayout Spacing="10">
+                <Label Text="Input Modes:"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="#FFFFFF">
+                    <Label.Shadow>
+                        <Shadow Brush="#000000"
+                                Offset="1,1"
+                                Radius="1"
+                                Opacity="0.5" />
+                    </Label.Shadow>
+                </Label>
+
+                <Frame BackgroundColor="#252525"
+                       BorderColor="#4CAF50"
+                       CornerRadius="8"
+                       Padding="5"
+                       HasShadow="False">
+                    <Picker x:Name="InputModePicker"
+                            ItemsSource="{Binding inputModes}"
+                            SelectedItem="{Binding selectedInputMode}"
+                            BackgroundColor="Transparent"
+                            TextColor="#FFFFFF"
+                            FontSize="16"
+                            SelectedIndexChanged="InputSelectedChanged"/>
+                </Frame>
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- Przycisk Zapisz -->
+        <Button Grid.Row="3"
+                Text="Save changes and go back"
                 Clicked="ButtonClicked"
-                WidthRequest="200"
-                HeightRequest="50"
+                WidthRequest="280"
+                HeightRequest="55"
+                HorizontalOptions="Center"
                 VerticalOptions="End"
-                BackgroundColor="#4CAF50"
+                Margin="0,20,0,0"
                 TextColor="#FFFFFF"
-                CornerRadius="25"/>
-    </VerticalStackLayout>
+                FontAttributes="Bold"
+                FontSize="16"
+                CornerRadius="28">
+            <Button.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#4CAF50" Offset="0.0" />
+                    <GradientStop Color="#388E3C" Offset="1.0" />
+                </LinearGradientBrush>
+            </Button.Background>
+            <Button.Shadow>
+                <Shadow Brush="#4CAF50"
+                        Offset="0,3"
+                        Radius="6"
+                        Opacity="0.5" />
+            </Button.Shadow>
+        </Button>
+    </Grid>
 </ContentPage>

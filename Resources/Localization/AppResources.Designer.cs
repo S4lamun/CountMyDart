@@ -241,6 +241,15 @@ namespace CountMyDartMaui.Resources.Localization {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu No players have been added.
+        /// </summary>
+        internal static string PlayerPageNoPlayers {
+            get {
+                return ResourceManager.GetString("PlayerPageNoPlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Start new game.
         /// </summary>
         internal static string ScoreboardPageButton1 {
@@ -255,6 +264,15 @@ namespace CountMyDartMaui.Resources.Localization {
         internal static string ScoreboardPageNoWinner {
             get {
                 return ResourceManager.GetString("ScoreboardPageNoWinner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Player Ranking .
+        /// </summary>
+        internal static string ScoreboardPageRanking {
+            get {
+                return ResourceManager.GetString("ScoreboardPageRanking", resourceCulture);
             }
         }
         

@@ -13,7 +13,7 @@
     </ContentPage.Background>
 
     <Grid RowDefinitions="Auto, *" Padding="15">
-        <!-- Header z informacja o rundzie -->
+        
         <Border Grid.Row="0"
                 Stroke="#CC0000"
                 StrokeThickness="2"
@@ -47,7 +47,7 @@
             </Label>
         </Border>
 
-        <!-- Glowna zawartosc -->
+        
         <ScrollView Grid.Row="1" HorizontalScrollBarVisibility="Default">
             <VerticalStackLayout Spacing="20">
                 <CollectionView ItemsSource="{Binding Players}">
@@ -71,7 +71,7 @@
                                 </Border.Shadow>
 
                                 <Grid ColumnDefinitions="Auto, *, Auto" Padding="15">
-                                    <!-- Nazwa gracza -->
+                                    
                                     <Border Grid.Column="0"
                                             BackgroundColor="#222222"
                                             StrokeShape="RoundRectangle 12"
@@ -109,7 +109,7 @@
                                         </Label>
                                     </Border>
 
-                                    <!-- Wyniki rzutow -->
+                                   
                                     <VerticalStackLayout Grid.Column="1" Spacing="10">
                                         <Label Text="{x:Static local:AppResources.GamePageThrows}" 
                                                FontAttributes="Bold" 
@@ -123,19 +123,20 @@
                                                         Opacity="0.5" />
                                             </Label.Shadow>
                                         </Label>
-                                        <Grid ColumnSpacing="8">
+                                        <Grid ColumnSpacing="15">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*" />
                                                 <ColumnDefinition Width="*" />
                                                 <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
 
-                                            <!-- Rzut 1 -->
+                                            
                                             <Border Grid.Column="0"
                                                     StrokeThickness="1.5"
                                                     Stroke="#4CAF50"
                                                     StrokeShape="RoundRectangle 12"
-                                                    BackgroundColor="#222222">
+                                                    BackgroundColor="#222222"
+                                                    MinimumWidthRequest="35">
                                                 <Border.Shadow>
                                                     <Shadow Brush="#4CAF50"
                                                             Offset="0,2"
@@ -158,12 +159,13 @@
                                                 </Entry>
                                             </Border>
 
-                                            <!-- Rzut 2 -->
+                                            
                                             <Border Grid.Column="1"
                                                     StrokeThickness="1.5"
                                                     Stroke="#4CAF50"
                                                     StrokeShape="RoundRectangle 12"
-                                                    BackgroundColor="#222222">
+                                                    BackgroundColor="#222222"
+                                                    MinimumWidthRequest="35">
                                                 <Border.Shadow>
                                                     <Shadow Brush="#4CAF50"
                                                             Offset="0,2"
@@ -186,12 +188,13 @@
                                                 </Entry>
                                             </Border>
 
-                                            <!-- Rzut 3 -->
+                                            
                                             <Border Grid.Column="2"
                                                     StrokeThickness="1.5"
                                                     Stroke="#4CAF50"
                                                     StrokeShape="RoundRectangle 12"
-                                                    BackgroundColor="#222222">
+                                                    BackgroundColor="#222222"
+                                                    MinimumWidthRequest="35">
                                                 <Border.Shadow>
                                                     <Shadow Brush="#4CAF50"
                                                             Offset="0,2"
@@ -216,7 +219,7 @@
                                         </Grid>
                                     </VerticalStackLayout>
 
-                                    <!-- Punkty docelowe -->
+                                    
                                     <Border Grid.Column="2"
                                             BackgroundColor="#222222" 
                                             StrokeShape="RoundRectangle 12"
@@ -262,9 +265,9 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
-                <!-- Przyciski -->
+              
                 <Grid ColumnDefinitions="*, *" ColumnSpacing="20" Margin="0,10,0,20">
-                    <!-- Przycisk akceptacji rzutow -->
+                  
                     <Button Grid.Column="0"
                             Text="{x:Static local:AppResources.GamePageButton1}" 
                             Clicked="AcceptAllThrowsButtonClicked" 
@@ -287,7 +290,7 @@
                         </Button.Shadow>
                     </Button>
 
-                    <!-- Przycisk zakonczenia gry -->
+                   
                     <Button Grid.Column="1"
                             Text="{x:Static local:AppResources.GamePageButton2}" 
                             Clicked="EndGameButtonClicked" 

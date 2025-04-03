@@ -3,7 +3,8 @@
              xmlns:local="clr-namespace:CountMyDartMaui.Resources.Localization"
              x:Class="CountMyDartMaui.MainPage"
              Title=""
-             BackgroundColor="#121212">
+             BackgroundColor="#121212"
+             Shell.NavBarIsVisible="False">
 
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">

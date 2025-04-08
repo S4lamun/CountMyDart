@@ -1,6 +1,7 @@
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Graphics;
 using System;
+using System.Threading.Tasks;
 
 namespace CountMyDartMaui
 {
@@ -61,13 +62,13 @@ namespace CountMyDartMaui
 
             if (tapPoint.HasValue)
             {
-                int score = CalculateScoreFromTapPosition(tapPoint.Value, ((VisualElement)sender).Width, ((VisualElement)sender).Height);
+                int score = await CalculateScoreFromTapPosition(tapPoint.Value, ((VisualElement)sender).Width, ((VisualElement)sender).Height);
                 GlobalSettings.CurrentThrow = score;
                 await Shell.Current.GoToAsync("..");
             }
         }
 
-        private int CalculateScoreFromTapPosition(Point tapPoint, double width, double height)
+        private async Task<int> CalculateScoreFromTapPosition(Point tapPoint, double width, double height)
         {
             double centerX = width / 2;
             double centerY = height / 2;
@@ -91,6 +92,57 @@ namespace CountMyDartMaui
             double doubleRingInner = radius * 0.70;
             double doubleRingOuter = radius * 0.80;
 
+            string action=string.Empty; 
+
+            if(distance<=innerBullRadius)
+            {
+                if(Preferences.Get("AppLanguage", "")=="en")
+                {
+                    action = await DisplayActionSheet("Choose how much you scored:","", "", "25", "50");
+                    
+                }
+                else if(Preferences.Get("AppLanguage", "") == "pl")
+                {
+                    action = await DisplayActionSheet("Wybierz ile rzuci³eœ:", "", "", "25", "50");
+                }
+                else if(Preferences.Get("AppLanguage", "")=="de")
+                {
+                    action = await DisplayActionSheet("Wählen Sie aus, wie viele Punkte Sie erzielt haben:", "", "", "25", "50");
+                }
+                if (action == "25")
+                {
+                    return 25;
+                }
+                else if (action == "50")
+                {
+                    return 50;
+                }
+
+            }
+            else if (distance <= doubleRingOuter)
+            {
+                if (Preferences.Get("AppLanguage", "") == "en")
+                {
+                    action = await DisplayActionSheet("Choose how much you scored:", "", "", $"{score}", $"{score*2}", $"{score*3}");
+
+                }
+                else if (Preferences.Get("AppLanguage", "") == "pl")
+                {
+                    action = await DisplayActionSheet("Wybierz ile rzuci³eœ:", "", "", $"{score}", $"{score * 2}", $"{score * 3}");
+                }
+                else if (Preferences.Get("AppLanguagee", "") == "de")
+                {
+                    action = await DisplayActionSheet("Wählen Sie aus, wie viele Punkte Sie erzielt haben:", "", "", $"{score}", $"{score * 2}", $"{score * 3}");
+                }
+
+                if(int.TryParse(action, out int d))
+                    {
+                    return d;
+                }
+            }
+
+            return 0;
+            /*
             if (distance <= bullseyeRadius)
                 return 50; // Bullseye
 
@@ -106,7 +158,8 @@ namespace CountMyDartMaui
             if (distance < doubleRingInner)
                 return score; // Normal Sector
 
-            return 0; // Beyond board
+            return 0; // Beyond board\
+            */
         }
 
         private void DisplayScore(int score)

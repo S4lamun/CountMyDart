@@ -13,7 +13,7 @@
     </ContentPage.Background>
 
     <Grid RowDefinitions="Auto, *" Padding="15">
-       
+        
         <Border Grid.Row="0"
                 Stroke="#CC0000"
                 StrokeThickness="2"

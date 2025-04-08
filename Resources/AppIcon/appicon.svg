@@ -1,4 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg width="456" height="456" viewBox="0 0 456 456" version="1.1" xmlns="http://www.w3.org/2000/svg">
-    <rect x="0" y="0" width="456" height="456" fill="#512BD4" />
+    <rect x="0" y="0" width="456" height="456" />
+  <!-- Text Glow Effect -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    
+    <!-- Shadow for Dartboard -->
+    <filter id="dartboardShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feFlood flood-color="#4CAF50" flood-opacity="0.6" />
+      <feComposite in2="blur" operator="in" />
+      <feComposite in="SourceGraphic" operator="over" />
+    </filter>
+    
+    <!-- Shadow for Title Box -->
+    <filter id="titleShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feFlood flood-color="#CC0000" flood-opacity="0.5" />
+      <feComposite in2="blur" operator="in" />
+      <feComposite in="SourceGraphic" operator="over" />
+    </filter>
+    
+    <!-- Text Shadow -->
+    <filter id="textShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="1" dy="1" stdDeviation="1" flood-color="#000000" flood-opacity="0.7" />
+    </filter>
+  
+  <!-- Main Background -->
+  <rect width="100%" height="100%" fill="url(#bgGradient)" />
+  
+
 </svg>
